@@ -1,0 +1,45 @@
+name: little_miracles_orphange
+description: A new Flutter project.
+
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+
+
+  cupertino_icons: ^1.0.2
+  flutter_native_splash: ^2.2.15
+  firebase_core: ^2.3.0
+  anim_search_bar: ^2.0.2
+  firebase_auth: ^4.1.4
+  cloud_firestore: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+
+flutter_native_splash: 
+  color: "#FF0000"
+  image: assets/images/logo.png
+
+
+flutter:
+  assets: 
+    - assets/images/
+
+  uses-material-design: true
+

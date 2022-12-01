@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488184661163",
+    "project_id": "little-child-orphange",
+    "storage_bucket": "little-child-orphange.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488184661163:android:e486dfc33f31726b5da3ee",
+        "android_client_info": {
+          "package_name": "com.example.little_miracles_orphange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488184661163-bcs6j6ptt4ggjlpcc6a1vvhc54dppeju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG05cKK87I80rdBVA-AUkBmdX7Md3ELfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488184661163-bcs6j6ptt4ggjlpcc6a1vvhc54dppeju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
