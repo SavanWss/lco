@@ -6,10 +6,10 @@ class FbAuth {
       print("fb auth caled");
       final flag = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      print("flag === ${flag}");
+      print("flag === $flag");
       return {"status": true, "body": flag};
     } catch (e) {
-      print("error ${e}");
+      print("error $e");
       return {"status": false, "error": e};
     }
   }

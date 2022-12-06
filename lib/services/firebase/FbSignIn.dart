@@ -15,8 +15,8 @@ class FbSignIn {
 
     var data = userData.where("email", isEqualTo: email);
 
-    print("your data is ===> ${data}");
+    print("your data is ===> $data");
 
-    print("loginFlag === ${loginFlag}");
+    print("loginFlag === $loginFlag");
   }
 }

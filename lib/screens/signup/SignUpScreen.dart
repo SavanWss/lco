@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
@@ -18,6 +20,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  // ignore: non_constant_identifier_names
   final _FormKey = GlobalKey<FormState>();
 
   // controllers
@@ -54,8 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
+    
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(

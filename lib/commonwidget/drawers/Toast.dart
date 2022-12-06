@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class Toast {
   static toastView({required msg}) {
-    var LENGTH_SHORT;
     Fluttertoast.showToast(
         msg: msg,
         gravity: ToastGravity.CENTER,

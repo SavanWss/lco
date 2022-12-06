@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 
@@ -13,39 +15,31 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    List<String> placeHolderList = [
-      "Name",
-      "Email",
-      "Number",
-      "Password",
-      "confirmPassword"
-    ];
 
     name(value) {
-      print('your firts name is === ${value}');
+      print('your firts name is === $value');
     }
 
     email(value) {
-      print('your email is === ${value}');
+      print('your email is === $value');
     }
 
     nummber(value) {
-      print('your number is === ${value}');
+      print('your number is === $value');
     }
 
     password(value) {
-      print('your password is === ${value}');
+      print('your password is === $value');
     }
 
     cpassword(value) {
-      print('your  cpassword is === ${value}');
+      print('your  cpassword is === $value');
     }
 
     // final _tabBarKey = GlobalKey(TabBarView)
 
     // final GlobalKey<TabBar> fileListKey = new GlobalKey<TabBar>();
 
-    var functions = [name, email, nummber, password, cpassword];
 
     var width = MediaQuery.of(context).size.width;
 

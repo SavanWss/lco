@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:sqflite/sqflite.dart';
 
 class Db {
@@ -17,7 +17,7 @@ class Db {
 
         print("table is created");
       } catch (e) {
-        print("your error === ${e}");
+        print("your error === $e");
       }
     });
 
@@ -35,7 +35,7 @@ class Db {
               print('inserted2: $id2');
             });
           } catch (e) {
-            print("insertion error ${e}");
+            print("insertion error $e");
           }
 
           List<Map> list = await database.rawQuery('SELECT * FROM Test');
@@ -66,7 +66,7 @@ class Db {
             await database.close();
             print("database successfully closed");
           } catch (e) {
-            print("error is ${e}");
+            print("error is $e");
           }
         }
 
@@ -88,7 +88,7 @@ class Db {
             print(list);
             // print(expectedList);
           } catch (e) {
-            print("yoour erro ${e}");
+            print("yoour erro $e");
           }
         }
         break;

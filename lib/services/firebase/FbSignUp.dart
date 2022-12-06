@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:little_miracles_orphange/screens/signup/SignUpScreen.dart';
 import 'package:little_miracles_orphange/services/firebase/FbAuth.dart';
 
 class FbSignUp {
@@ -18,7 +17,7 @@ class FbSignUp {
       // email id entered in firebase auth module
       var response =
           await FbAuth.fbAuthSignUp(email: email, password: password);
-      print("response === ${response}");
+      print("response === $response");
 
       if (response["status"] == false) {
         return {"status": false, "error": response["error"]};
@@ -29,7 +28,7 @@ class FbSignUp {
       CollectionReference userData =
           FirebaseFirestore.instance.collection("users");
 
-      print("collection reference === ${userData}");
+      print("collection reference === $userData");
 
       try {
         var fireStoreResponse = await userData.add({
