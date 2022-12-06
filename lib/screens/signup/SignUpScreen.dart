@@ -1,35 +1,43 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
+
+import 'package:little_miracles_orphange/commonwidget/drawers/Toast.dart';
+
 import 'package:little_miracles_orphange/services/firebase/FbSignUp.dart';
+
 import 'package:little_miracles_orphange/services/validators/mobile_validator.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _FormKey = GlobalKey<FormState>();
 
+  // controllers
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  final addressController = TextEditingController();
   final mobileController = TextEditingController();
   final professionController = TextEditingController();
   final yearlyIncomeController = TextEditingController();
   final dobController = TextEditingController();
   final passwordController = TextEditingController();
 
-  var name = "";
-  var email = "";
-  var mobileNumber = "";
-  var password = "";
+  var gender = "";
+  var maritialStatus = "";
 
   @override
   void dispose() {
     nameController.dispose();
     emailController.dispose();
+    addressController.dispose();
     mobileController.dispose();
     professionController.dispose();
     yearlyIncomeController.dispose();
@@ -39,7 +47,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   @override
-  void didUpdateWidget(covariant SignUp oldWidget) {
+  void didUpdateWidget(covariant SignUpScreen oldWidget) {
     print("widget is updated");
     super.didUpdateWidget(oldWidget);
   }
@@ -51,7 +59,7 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/images/logo.png"))),
+          image: DecorationImage(image: AssetImage("assets/images/logo.png"), opacity: 0.5)),
       child: Form(
         key: _FormKey,
         child: Padding(
@@ -143,6 +151,32 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
+              // address
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    labelText: "Address",
+                    suffixIcon: Icon(Icons.numbers),
+                    labelStyle: TextStyle(fontSize: 15),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    errorStyle: TextStyle(
+                        color: Color.fromARGB(255, 255, 0, 0), fontSize: 10),
+                  ),
+                  controller: addressController,
+                  validator: ((value) {
+                    if (value!.isEmpty || value == null) {
+                      return "Enter the Address";
+                    } else {
+                      return null;
+                    }
+                  }),
+                ),
+              ),
+
               // profession text field
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -188,9 +222,6 @@ class _SignUpState extends State<SignUp> {
                   validator: ((value) {
                     if (value!.isEmpty || value == null) {
                       return "Enter the Yearly income";
-                    } else if (!MobileValidator.mobleValidator(
-                        mobile_number: value)) {
-                      return "Enter the Valid mobile number";
                     } else {
                       return null;
                     }
@@ -205,7 +236,7 @@ class _SignUpState extends State<SignUp> {
                   autofocus: false,
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
-                    labelText: "dob Income",
+                    labelText: "dob",
                     suffixIcon: Icon(Icons.calendar_view_day_outlined),
                     labelStyle: TextStyle(fontSize: 15),
                     border: OutlineInputBorder(
@@ -216,7 +247,7 @@ class _SignUpState extends State<SignUp> {
                   controller: dobController,
                   validator: ((value) {
                     if (value!.isEmpty || value == null) {
-                      return "Enter the Yearly income";
+                      return "Enter the DOB";
                     } else {
                       return null;
                     }
@@ -231,7 +262,7 @@ class _SignUpState extends State<SignUp> {
                   autofocus: false,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
-                    labelText: "password Income",
+                    labelText: "password",
                     suffixIcon: Icon(Icons.calendar_view_day_outlined),
                     labelStyle: TextStyle(fontSize: 15),
                     border: OutlineInputBorder(
@@ -242,7 +273,7 @@ class _SignUpState extends State<SignUp> {
                   controller: passwordController,
                   validator: ((value) {
                     if (value!.isEmpty || value == null) {
-                      return "Enter the adress";
+                      return "Enter the password";
                     } else {
                       return null;
                     }
@@ -250,72 +281,96 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              //   Container(
-              //     child: Column(
-              //       children: [
-              //         for(int i = 0; i < initialValueData.length; i++) ...[
-              //            Text(initialValueData[i]),
-              //            TextFormField(
-              //              initialValue: initialValueData[i],
-              //             )
-              //          ],
-              //       ],
-              //     ),
-              //   ),
+              // gender
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: CustomSingleSelectField(
+                    decoration: InputDecoration(
+                      labelText: "Gender",
+                      suffixIcon: Icon(Icons.calendar_view_day_outlined),
+                      labelStyle: TextStyle(fontSize: 15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      errorStyle: TextStyle(
+                          color: Color.fromARGB(255, 255, 0, 0), fontSize: 10),
+                    ),
+                    initialValue: "Male",
+                    items: ["Male", "Female", "Other"],
+                    validator: ((value) {
+                      if (value!.isEmpty || value == null) {
+                        return "Enter the Gender";
+                      } else {
+                        return null;
+                      }
+                    }),
+                    onSelectionDone: (value) {
+                      gender = value;
+                      print(gender);
+                    },
+                    selectedItemColor: Color.fromARGB(255, 255, 0, 0),
+                    title: 'Gender',
+                  )),
+
+              // maritial status
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: CustomSingleSelectField(
+                    items: ["Married", "UnMarried", "Divorcee"],
+                    decoration: InputDecoration(
+                      labelText: "Maritial Status",
+                      suffixIcon: Icon(Icons.calendar_view_day_outlined),
+                      labelStyle: TextStyle(fontSize: 15),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      errorStyle: TextStyle(
+                          color: Color.fromARGB(255, 255, 0, 0), fontSize: 10),
+                    ),
+                    onSelectionDone: (value) {
+                      maritialStatus = value;
+                      print(maritialStatus);
+                    },
+                    validator: ((value) {
+                      if (value!.isEmpty || value == null) {
+                        return "Enter the Maritial Status";
+                      } else {
+                        return null;
+                      }
+                    }),
+                    selectedItemColor: Color.fromARGB(255, 255, 0, 0),
+                    title: 'Gender',
+                  )),
 
               ElevatedButton(
                   onPressed: () async {
+               
                     if (_FormKey.currentState!.validate()) {
-                      name = nameController.text;
-                      email = emailController.text;
-                      password = passwordController.text;
-
-                      print("main reasponse clicked");
+       
 
                       var mainResponse = await FbSignUp.fbSignUp(
-                          email: email,
-                          password: password,
-                          name: name,
+                          email: emailController.text,
+                          password: passwordController.text,
+                          name: nameController.text,
                           mobile: mobileController.text,
-                          gender: "gender",
-                          dob: "dob",
-                          profession: "profession",
-                          yearllyIncome: "yearllyIncome",
-                          address: "address",
-                          marriedStatus: "marriedStatus");
+                          gender: gender,
+                          dob: dobController.text,
+                          profession: professionController.text,
+                          yearllyIncome: yearlyIncomeController.text,
+                          address: addressController.text,
+                          marriedStatus: maritialStatus);
 
+                      print("mainResponse");
                       print(mainResponse);
 
                       print("firedata clicked");
-                      // await FirebaseFirestoreData.getAllData(collection: "student");
 
-                      CollectionReference userData =
-                          FirebaseFirestore.instance.collection("users");
-
-                      print("collection reference === ${userData}");
-
-                      var fireStoreResponse = await userData.add({
-                        "address": "address",
-                        "adopted_child": "0",
-                        "dob": "13/11/2002",
-                        "email": email,
-                        "gender": "male",
-                        "married_status": "true",
-                        "mobile": "9898489400",
-                        "name": "Savan Italiya",
-                        "password": password,
-                        "profession": "profession",
-                        "role": "user",
-                        "total_dnt_fund": 0,
-                        "yearly_income": 0,
-                      });
-                      print("print firestore ====");
-                      print(fireStoreResponse);
-                      setState(() {
-                        print(name);
-                        print(email);
-                        print(password);
-                      });
+                      if (mainResponse["status"] == false) {
+                        Toast.toastView(msg: "SignUp Failed");
+                        setState(() {});
+                      } else {
+                        Toast.toastView(msg: "SignUp Successfully");
+                        Navigator.pushReplacementNamed(
+                            context, ScreenRoutes.welcomeScreen);
+                      }
                     }
                   },
                   child: Text("insertData"))

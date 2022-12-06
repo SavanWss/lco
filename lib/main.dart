@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
+import 'package:little_miracles_orphange/screens/signIn/SignInScreen.dart';
 
-import 'package:little_miracles_orphange/screens/signup/SignUp.dart';
+import 'package:little_miracles_orphange/screens/signup/SignUpScreen.dart';
 import 'package:little_miracles_orphange/screens/welcome_screen/WelcomeScreen.dart';
 
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
@@ -32,10 +33,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: PrimaryTheme.colorCustom,
         bottomAppBarColor: PrimaryTheme.colorCustom
       ),
-      initialRoute: ScreenRoutes.signUpScreen,
+      initialRoute: ScreenRoutes.signInScreen,
       routes: {
         ScreenRoutes.welcomeScreen:(context) => WelcomeScreen(),
-        ScreenRoutes.signUpScreen:(context) => SignUp(),
+        ScreenRoutes.signUpScreen:(context) => SignUpScreen(),
+        ScreenRoutes.signInScreen:(context) => SignInScreen()
       },
     );
   }

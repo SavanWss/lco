@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class AdminDrawer extends StatefulWidget {
   const AdminDrawer({super.key});
@@ -63,7 +64,13 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 leading: Icon(Icons.settings),
                 title: Text('Notice'),
               ),
-
+               ListTile(
+                onTap: () {
+                  Navigator.popAndPushNamed(context, ScreenRoutes.signInScreen);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('LogOut'),
+              ),
               // Spacer(),
 
               Center(

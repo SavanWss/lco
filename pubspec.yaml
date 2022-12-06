@@ -23,6 +23,10 @@ dependencies:
   anim_search_bar: ^2.0.2
   firebase_auth: ^4.1.4
   cloud_firestore: ^4.1.0
+  sqflite: ^2.2.1
+  http: ^0.13.5
+  fluttertoast: ^8.1.1
+  flutter_custom_selector: ^0.0.3
 
 dev_dependencies:
   flutter_test:
