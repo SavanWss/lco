@@ -9,8 +9,9 @@ class ScreenRoutes {
   static String adminDashboardScreen = "/admindashboard";
   static String adminUserScreen = "/adminuser";
   static String adminManageChildScreen = "/adminmanagechild";
-  static String adminnoticescreen = "/adminnotice";
-  static String adminreportscreen = "/adminreports";
+  static String adminNoticescreen = "/adminnotice";
+  static String adminReportscreen = "/adminreports";
+  static String adminAddChildScreen = "/adminaddchild";
 
   // user Screens
   static String userDashboardScreen = "/userdashboard";

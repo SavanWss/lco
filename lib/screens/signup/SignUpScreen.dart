@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
 
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+import 'package:little_miracles_orphange/services/datastorerinutils/LogInDataSaver.dart';
+import 'package:little_miracles_orphange/services/firebase/FbSignIn.dart';
 
 import 'package:little_miracles_orphange/services/firebase/FbSignUp.dart';
 
 import 'package:little_miracles_orphange/services/validators/mobile_validator.dart';
+import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
@@ -57,11 +60,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/images/logo.png"), opacity: 0.5)),
+          image: DecorationImage(
+              image: AssetImage("assets/images/logo.png"), opacity: 0.5)),
       child: Form(
         key: _FormKey,
         child: Padding(
@@ -296,7 +299,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       errorStyle: TextStyle(
                           color: Color.fromARGB(255, 255, 0, 0), fontSize: 10),
                     ),
-                    initialValue: "Male",
                     items: ["Male", "Female", "Other"],
                     validator: ((value) {
                       if (value!.isEmpty || value == null) {
@@ -344,10 +346,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               ElevatedButton(
                   onPressed: () async {
-               
                     if (_FormKey.currentState!.validate()) {
-       
-
                       var mainResponse = await FbSignUp.fbSignUp(
                           email: emailController.text,
                           password: passwordController.text,
@@ -370,8 +369,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         setState(() {});
                       } else {
                         Toast.toastView(msg: "SignUp Successfully");
-                        Navigator.pushReplacementNamed(
-                            context, ScreenRoutes.welcomeScreen);
+
+                        var login = await FbSignIn.fbSignIn(
+                            email: emailController.text,
+                            password: passwordController.text);
+
+                        //  login validation
+                        print("login === $login");
+                        if (login["status"] == true) {
+                          var userData = login["data"][0];
+
+                          // print("user name == ${userData["name"]}");
+                          // print("user email == ${userData["email"]}");
+                          // print("user  == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+                          // print("user name == ${userData["name"]}");
+
+                          LogInDataSaver.logInDataSave(
+                              name: userData["name"],
+                              mobile: userData["mobile"],
+                              email: userData["email"],
+                              dob: userData["dob"],
+                              role: userData["role"],
+                              gender: userData["gender"],
+                              address: userData["address"],
+                              profession: userData["profession"],
+                              totaldonatedfund: userData["total_dnt_fund"],
+                              adoptedchild: userData["adopted_child"],
+                              yearlyincome: userData["yearly_income"],
+                              marriedstatus: userData["married_status"]);
+
+                          if (LoggedInDetails.userRole == "user") {
+                            Navigator.pushReplacementNamed(
+                                context, ScreenRoutes.userDashboardScreen);
+                          } else {
+                            Navigator.pushReplacementNamed(
+                                context, ScreenRoutes.adminDashboardScreen);
+                          }
+                        } else {
+                          // Toast View
+                          Toast.toastView(msg: "login Failed");
+                        }
                       }
                     }
                   },

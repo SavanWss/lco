@@ -1,6 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
-import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
@@ -112,15 +110,26 @@ class _SignInScreenState extends State<SignInScreen> {
                     if (_FormKey.currentState!.validate()) {
                       // signin method is called
                       var login = await FbSignIn.fbSignIn(
-                          email: emailController.text, password: passwordController.text);
+                          email: emailController.text,
+                          password: passwordController.text);
 
                       //  login validation
                       print("login === $login");
                       if (login["status"] == true) {
-
                         var userData = login["data"][0];
 
-                        LogInDataSaver.LogInDataSave(
+                        // print("user name == ${userData["name"]}");
+                        // print("user email == ${userData["email"]}");
+                        // print("user  == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+                        // print("user name == ${userData["name"]}");
+
+                        LogInDataSaver.logInDataSave(
                             name: userData["name"],
                             mobile: userData["mobile"],
                             email: userData["email"],
@@ -135,7 +144,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             marriedstatus: userData["married_status"]);
 
                         if (LoggedInDetails.userRole == "user") {
-                          Navigator.pushReplacementNamed(context, ScreenRoutes.userDashboardScreen);
+                          Navigator.pushReplacementNamed(
+                              context, ScreenRoutes.userDashboardScreen);
                         } else {
                           Navigator.pushReplacementNamed(
                               context, ScreenRoutes.adminDashboardScreen);

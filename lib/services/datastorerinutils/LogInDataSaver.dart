@@ -1,7 +1,7 @@
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 
 class LogInDataSaver {
-  static LogInDataSave(
+  static logInDataSave(
       {required name,
       required mobile,
       required email,

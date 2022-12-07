@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/UserDrawer.dart';
 
 class DashUserScreen extends StatefulWidget {
@@ -15,6 +13,7 @@ class _DashUserScreenState extends State<DashUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: Text("user dashboard"),
       drawer: UserDrawer(),
     );
   }

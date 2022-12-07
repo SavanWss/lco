@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 
 class ReposrtAdminScreen extends StatefulWidget {
@@ -14,7 +12,11 @@ class _ReposrtAdminScreenState extends State<ReposrtAdminScreen> {
   @override
  Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          shadowColor: Color.fromARGB(48, 208, 46, 237),
+          title: Text("Reports"),
+          titleSpacing: 1,
+          centerTitle: true,),
       drawer: AdminDrawer(),
     );
   }

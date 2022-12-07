@@ -32,7 +32,7 @@ class FbSignIn {
 // print("after");
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection("users")
-        .where("email", isEqualTo: "s@g.com")
+        .where("email", isEqualTo: email)
         .get();
 
     List<Object?> data = snapshot.docs.map((e) {

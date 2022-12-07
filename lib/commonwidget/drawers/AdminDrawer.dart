@@ -81,14 +81,14 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminreportscreen);
+                  Navigator.pushNamed(context, ScreenRoutes.adminReportscreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Reports'),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminnoticescreen);
+                  Navigator.pushNamed(context, ScreenRoutes.adminNoticescreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Notice'),

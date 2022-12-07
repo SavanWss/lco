@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
+import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart';
 
 import 'package:little_miracles_orphange/screens/admin/dashboard/DashAdminScreen.dart';
-import 'package:little_miracles_orphange/screens/admin/managechild/MngChildAdminScreen.dart';
+import 'package:little_miracles_orphange/screens/admin/child/MngChildAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/NoticeAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/reports/ReportsAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/users/userAdminScreen.dart';
@@ -53,8 +54,9 @@ class MyApp extends StatelessWidget {
         ScreenRoutes.adminDashboardScreen:(context) => DashAdminScreen(),
         ScreenRoutes.adminUserScreen:(context) => UserAdminScreen(),
         ScreenRoutes.adminManageChildScreen:(context) => MngChildAdminScreen(),
-        ScreenRoutes.adminnoticescreen:(context) => NoticeAdminScreen(),
-        ScreenRoutes.adminreportscreen:(context) => ReposrtAdminScreen(),
+        ScreenRoutes.adminNoticescreen:(context) => NoticeAdminScreen(),
+        ScreenRoutes.adminReportscreen:(context) => ReposrtAdminScreen(),
+        ScreenRoutes.adminAddChildScreen:(context) => AddChildAdmin(),
 
         // user Screen
         ScreenRoutes.userDashboardScreen:(context) => DashUserScreen(),

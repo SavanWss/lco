@@ -13,33 +13,34 @@ class _DashAdminScreenState extends State<DashAdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          shadowColor: Color.fromARGB(48, 208, 46, 237),
+          title: Text("DashBoard"),
+          titleSpacing: 1,
+          centerTitle: true,),
       drawer: AdminDrawer(),
       body: Container(
         child: ListView(
           children: [
-
             Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, top: 25),
-              child: GestureDetector(
-                onTap: () {
-                  print("card view clicked");
-                },
-                child: Card(
-                shadowColor: Color.fromARGB(189, 70, 63, 63),
-                borderOnForeground: true,
-                color: Color.fromARGB(255, 255, 255, 255),
-                shape: Border.all(
-                    style: BorderStyle.solid,
-                    color: Color.fromARGB(90, 19, 15, 15)),
-                child: SizedBox(
-                  height: 50,
-                  child: Text("Savan"),
-                ),
-              ),
-              )
-            )
-
+                padding: EdgeInsets.only(left: 10, right: 10, top: 25),
+                child: GestureDetector(
+                  onTap: () {
+                    print("card view clicked");
+                  },
+                  child: Card(
+                    shadowColor: Color.fromARGB(189, 70, 63, 63),
+                    borderOnForeground: true,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: Border.all(
+                        style: BorderStyle.solid,
+                        color: Color.fromARGB(90, 19, 15, 15)),
+                    child: SizedBox(
+                      height: 50,
+                      child: Text("Savan"),
+                    ),
+                  ),
+                ))
           ],
         ),
       ),
