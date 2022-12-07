@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/firebase/FbSignOut.dart';
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
-class AdminDrawer extends StatefulWidget {
-  const AdminDrawer({super.key});
+class UserDrawer extends StatefulWidget {
+  const UserDrawer({super.key});
 
   @override
-  State<AdminDrawer> createState() => _AdminDrawerState();
+  State<UserDrawer> createState() => _UserDrawerState();
 }
 
-class _AdminDrawerState extends State<AdminDrawer> {
+class _UserDrawerState extends State<UserDrawer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,7 +39,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 ),
               ),
 
-               Center(
+              Center(
                 child: DefaultTextStyle(
                   style: TextStyle(
                     fontSize: 24,
@@ -55,10 +54,9 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 ),
               ),
 
-
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminDashboardScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userDashboardScreen);
                 },
                 leading: Icon(Icons.dashboard),
                 title: Text('DashBoard'),
@@ -66,38 +64,44 @@ class _AdminDrawerState extends State<AdminDrawer> {
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminManageChildScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userAdoptChildScreen);
                 },
                 leading: Icon(Icons.manage_accounts),
-                title: Text('ManageChild'),
+                title: Text('adopt child'),
               ),
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminUserScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userAddFundScreen);
                 },
                 leading: Icon(Icons.manage_accounts_outlined),
-                title: Text('Users'),
+                title: Text('make Donation'),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminreportscreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userReportScreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Reports'),
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminnoticescreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userNoticeScreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Notice'),
               ),
-               ListTile(
-                onTap: ()  async{
+              ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.userFeedBackScreen);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('FeedBack'),
+              ),
+              ListTile(
+                onTap: () async {
                   try {
                     await FbSignOut.fbSignOut();
-                    Toast.toastView(msg: "sign out successfully");
                   } catch (e) {
                     
                   }
@@ -122,7 +126,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
                   ),
                 ),
               )
-
             ],
           ),
         ),

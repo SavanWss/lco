@@ -1,9 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
-
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:little_miracles_orphange/commonwidget/drawers/Toast.dart';
+
+import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+import 'package:little_miracles_orphange/services/datastorerinutils/LogInDataSaver.dart';
 
 import 'package:little_miracles_orphange/services/firebase/FbSignIn.dart';
+import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
@@ -38,7 +42,8 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/images/logo.png"))),
+          image: DecorationImage(
+              image: AssetImage("assets/images/logo.png"), opacity: 1)),
       child: Form(
         key: _FormKey,
         child: Padding(
@@ -80,7 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   autofocus: false,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
-                    labelText: "password Income",
+                    labelText: "password",
                     suffixIcon: Icon(Icons.calendar_view_day_outlined),
                     labelStyle: TextStyle(fontSize: 15),
                     border: OutlineInputBorder(
@@ -90,34 +95,54 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   controller: passwordController,
                   validator: ((value) {
-                    if (value!.isEmpty || value == null) {
-                      return "Enter the password";
-                    } else {
-                      return null;
-                    }
+                    // if (value!.isEmpty || value == null) {
+                    //   return "Enter the password";
+                    // } else {
+                    //   return null;
+                    // }
+                    return null;
                   }),
                 ),
               ),
 
-            // SignIn Button
+              // SignIn Button
               ElevatedButton(
                   onPressed: () async {
-
+                    print("button is pressed");
                     if (_FormKey.currentState!.validate()) {
                       // signin method is called
                       var login = await FbSignIn.fbSignIn(
-                          email: emailController.text,
-                          password: passwordController.text);
+                          email: emailController.text, password: passwordController.text);
 
                       //  login validation
+                      print("login === $login");
                       if (login["status"] == true) {
-                        Navigator.pushReplacementNamed(
-                            context, ScreenRoutes.welcomeScreen);
+
+                        var userData = login["data"][0];
+
+                        LogInDataSaver.LogInDataSave(
+                            name: userData["name"],
+                            mobile: userData["mobile"],
+                            email: userData["email"],
+                            dob: userData["dob"],
+                            role: userData["role"],
+                            gender: userData["gender"],
+                            address: userData["address"],
+                            profession: userData["profession"],
+                            totaldonatedfund: userData["total_dnt_fund"],
+                            adoptedchild: userData["adopted_child"],
+                            yearlyincome: userData["yearly_income"],
+                            marriedstatus: userData["married_status"]);
+
+                        if (LoggedInDetails.userRole == "user") {
+                          Navigator.pushReplacementNamed(context, ScreenRoutes.userDashboardScreen);
+                        } else {
+                          Navigator.pushReplacementNamed(
+                              context, ScreenRoutes.adminDashboardScreen);
+                        }
                       } else {
-                        setState(() {
-                          // Toast View
-                          Toast.toastView(msg: "login Failed");
-                        });
+                        // Toast View
+                        Toast.toastView(msg: "login Failed");
                       }
                     }
                   },
