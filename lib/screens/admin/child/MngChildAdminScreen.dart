@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetChild.dart';
+import 'package:little_miracles_orphange/utils/managechild/ManageChildData.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class MngChildAdminScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class MngChildAdminScreen extends StatefulWidget {
 }
 
 class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
-  Future getData() async {
+  Future getChildData() async {
     var data = await FbGetChild.fbGetAllChild();
 
     return data;
@@ -33,8 +34,12 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
     if (gender == "Male") {
       return Icon(Icons.boy,
           color: Color.fromARGB(255, 242, 182, 182), size: 75);
+    } else if (gender == "Other") {
+      return Icon(Icons.transgender,
+          color: Color.fromARGB(255, 242, 182, 182), size: 75);
     } else {
-      return Icon(Icons.girl, color: Color.fromARGB(255, 242, 182, 182), size: 75);
+      return Icon(Icons.girl,
+          color: Color.fromARGB(255, 242, 182, 182), size: 75);
     }
   }
 
@@ -70,69 +75,86 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
                 );
               } else if (snapshot.hasData) {
                 final data = snapshot.data;
-                print("data in builder ${data.length}");
+
+                print("your data === $data");
+                var uiData = data;
                 return RefreshIndicator(
                     onRefresh: () async {
                       setState(() {});
                     },
-                    child: ListView(
+                    child: Stack(
                       children: [
-                        if (data.length == 0) ...[
-                          Center(
-                            child: Card(
-                              margin: EdgeInsets.all(10),
-                              color: Colors.white,
-                              shadowColor: Color.fromARGB(255, 255, 255, 255),
-                              elevation: 20,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  ListTile(
-                                    leading: Icon(Icons.album,
-                                        color:
-                                            Color.fromARGB(255, 255, 168, 168),
-                                        size: 45),
-                                    title: Text(
-                                      "there are no orphanage",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    subtitle: Text('world is happy'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                        for (int i = 0; i < data.length; i++) ...[
-                          Card(
-                            margin: EdgeInsets.all(10),
-                            color: Colors.white,
-                            shadowColor: Color.fromARGB(255, 255, 255, 255),
-                            elevation: 20,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                ListTile(
-                                  leading: genderIconSelector(data[i]["gender"]),
-                                  title: Text(
-                                    '''
-name :  ${data[i]["name"]}
-id :         ${data[i]["child_number"]}
-''',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  subtitle: Text(
-                                    '''
-gender :      ${data[i]["gender"]}
-adopted :    ${data[i]["adopted_status"]}
-''',
-                                    style: TextStyle(fontSize: 20),
+                        ListView(
+                          children: [
+                            if (uiData.length == 0) ...[
+                              Center(
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.white,
+                                  shadowColor:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  elevation: 20,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      ListTile(
+                                        leading: Icon(Icons.album,
+                                            color: Color.fromARGB(
+                                                255, 255, 168, 168),
+                                            size: 45),
+                                        title: Text(
+                                          "there are no orphanage",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        subtitle: Text('world is happy'),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ]
+                              )
+                            ],
+                            for (int i = 0; i < uiData.length; i++) ...[
+                              GestureDetector(
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.white,
+                                  shadowColor:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  elevation: 20,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      ListTile(
+                                        leading: genderIconSelector(
+                                            uiData[i]["gender"]),
+                                        title: Text(
+                                          '''
+name :  ${uiData[i]["name"]}
+id :         ${uiData[i]["child_number"]}
+''',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        subtitle: Text(
+                                          '''
+gender :      ${uiData[i]["gender"]}
+adopted :    ${uiData[i]["adopted_status"]}
+''',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  print(uiData[i]["child_number"]);
+                                  ManageChildData.selectedChildData = uiData[i]["child_number"];
+                                  print("managedChilddata === ${ManageChildData.selectedChildData}");
+                                  Navigator.restorablePushNamed(context, ScreenRoutes.adminUpdateChildScreen);
+                                },
+                              )
+                            ]
+                          ],
+                        )
                       ],
                     ));
               }
@@ -141,7 +163,7 @@ adopted :    ${data[i]["adopted_status"]}
               child: CircularProgressIndicator(),
             );
           },
-          future: getData()),
+          future: getChildData()),
     );
   }
 }

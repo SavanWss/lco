@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
 import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart';
+import 'package:little_miracles_orphange/screens/admin/child/UpdateChildAdmin.dart';
 
 import 'package:little_miracles_orphange/screens/admin/dashboard/DashAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/child/MngChildAdminScreen.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         ScreenRoutes.adminNoticescreen:(context) => NoticeAdminScreen(),
         ScreenRoutes.adminReportscreen:(context) => ReposrtAdminScreen(),
         ScreenRoutes.adminAddChildScreen:(context) => AddChildAdmin(),
+        ScreenRoutes.adminUpdateChildScreen:(context) => UpdateChildAdmin(),
 
         // user Screen
         ScreenRoutes.userDashboardScreen:(context) => DashUserScreen(),
