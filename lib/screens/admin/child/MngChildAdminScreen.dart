@@ -34,7 +34,7 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
       return Icon(Icons.boy,
           color: Color.fromARGB(255, 242, 182, 182), size: 75);
     } else {
-      Icon(Icons.girl, color: Color.fromARGB(255, 242, 182, 182), size: 75);
+      return Icon(Icons.girl, color: Color.fromARGB(255, 242, 182, 182), size: 75);
     }
   }
 
