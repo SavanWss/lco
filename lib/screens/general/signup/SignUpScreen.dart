@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
+import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/datastorerinutils/LogInDataSaver.dart';
 import 'package:little_miracles_orphange/services/firebase/FbSignIn.dart';
 
@@ -347,6 +349,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ElevatedButton(
                   onPressed: () async {
                     if (_FormKey.currentState!.validate()) {
+                      CircularIndicator.startCircularIndicator(context);
+
+                      bool interNetConnectionFlag = await InterNetConnectivityChecker.interNetConnectivityChecker();
+
+                      if (interNetConnectionFlag == false) {
+                        Toast.toastView(msg: "connect to network!!!");
+                        Navigator.of(context).pop();
+                        return;
+                      }
+
                       var mainResponse = await FbSignUp.fbSignUp(
                           email: emailController.text,
                           password: passwordController.text,
@@ -414,6 +426,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else {
                           // Toast View
                           Toast.toastView(msg: "login Failed");
+                          CircularIndicator.stopCircularIndicator(context);
                         }
                       }
                     }

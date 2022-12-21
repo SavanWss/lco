@@ -10,10 +10,10 @@ class UpdateChildAdmin extends StatefulWidget {
   State<UpdateChildAdmin> createState() => _UpdateChildAdminState();
 }
 
-class _UpdateChildAdminState extends State<UpdateChildAdmin> {
+class _UpdateChildAdminState extends State<UpdateChildAdmin> {       
 
     Future getChildData() async {
-    var data = await FbGetChild.fbGetChildById(uniqueid: ManageChildData.selectedChildData);
+    var data = await FbGetChild.fbGetChildById(uniqueid: ManageChildData.selectedChildData);                                
     return data;
   }
 

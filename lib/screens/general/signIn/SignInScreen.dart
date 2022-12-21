@@ -1,12 +1,15 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
 import 'package:flutter/material.dart';
 
+import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+
+import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/datastorerinutils/LogInDataSaver.dart';
-
 import 'package:little_miracles_orphange/services/firebase/FbSignIn.dart';
-import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
+import 'package:little_miracles_orphange/services/notification/Notifications.dart';
 
+import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -21,6 +24,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void initState()  {
+    super.initState();
+
+
+  }
 
   @override
   void dispose() {
@@ -41,13 +51,21 @@ class _SignInScreenState extends State<SignInScreen> {
         body: Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/logo.png"), opacity: 1)),
+              image: AssetImage("assets/images/logo.png"), opacity: 0.7)),
       child: Form(
         key: _FormKey,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: ListView(
             children: [
+              // GestureDetector(
+              //   onHorizontalDragStart: (details) {
+              //     Navigator.popUntil(
+
+              //       , (route) => false)
+              //   },
+              // )
+
               // email text field
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -108,6 +126,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () async {
                     print("button is pressed");
                     if (_FormKey.currentState!.validate()) {
+                      CircularIndicator.startCircularIndicator(context);
+
+                      bool interNetConnectionFlag = await InterNetConnectivityChecker.interNetConnectivityChecker();
+                      print(interNetConnectionFlag);
+                      if (interNetConnectionFlag == false) {
+                        Toast.toastView(msg: "connect to network!!!");
+                        Navigator.of(context).pop();
+                        return;
+                      }
+
                       // signin method is called
                       var login = await FbSignIn.fbSignIn(
                           email: emailController.text,
@@ -117,17 +145,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       print("login === $login");
                       if (login["status"] == true) {
                         var userData = login["data"][0];
-
-                        // print("user name == ${userData["name"]}");
-                        // print("user email == ${userData["email"]}");
-                        // print("user  == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
-                        // print("user name == ${userData["name"]}");
 
                         LogInDataSaver.logInDataSave(
                             name: userData["name"],
@@ -153,6 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       } else {
                         // Toast View
                         Toast.toastView(msg: "login Failed");
+                        Navigator.of(context).pop();
                       }
                     }
                   },
@@ -169,10 +187,32 @@ class _SignInScreenState extends State<SignInScreen> {
               // SignUp Button
               ElevatedButton(
                   onPressed: () async {
-                    print("button is pressed");
+                    print("button is pressed signUp");
                     Navigator.pushNamed(context, ScreenRoutes.signUpScreen);
+
+                    var afterResponse = await Notifications.sendNotification(
+                        deviceToken:
+                            "dOrRN-smSPeObaHZ2TdDcL:APA91bH1H7aKKxxMViBLnrDXRifXDnwltqFrA1Hztt1XkOVUtDN8iM39OyWCNhOwU80S5u1CZZX3pGo39hV7xJYPOSWAbzcHWU4zVhvcAkHcNKgINvePKuWeku86tfm3NM1KkVDG4hVO",
+                        title: "first from application",
+                        body: "body");
+
+                    print(afterResponse);
                   },
                   child: Text("SignUp")),
+
+              //           ProgressButton(
+              // borderRadius: BorderRadius.all(Radius.circular(8)),
+              // strokeWidth: 2,
+              // child: Text(
+              //   "Sample",
+              //   style: TextStyle(
+              //     color: Colors.white,
+              //     fontSize: 24,
+              //   ),
+              // ),
+              // onPressed: (AnimationController controller) async {
+              //   await httpJob(controller);
+              // }
             ],
           ),
         ),

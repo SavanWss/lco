@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
+import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/firebase/FbAddChild.dart';
 
 class AddChildAdmin extends StatefulWidget {
@@ -289,19 +291,40 @@ class _AddChildAdminState extends State<AddChildAdmin> {
                   ElevatedButton(
                       onPressed: () async {
                         print("object");
+
+                        bool interNetConnectionFlag = await InterNetConnectivityChecker.interNetConnectivityChecker();
+
+                        if (interNetConnectionFlag == false) {
+                          Toast.toastView(msg: "connect to network!!!");
+                          Navigator.of(context).pop();
+                          return;
+                        }
+
                         if (_FormKey.currentState!.validate()) {
                           print("form is validated");
-                          var response = await FbAddChild.fbAddChild(name: nameController.text, dob: dobController.text, entrancedate: entranceDateController.text, gender: gender, adoptedstatus: adoptionStatus, guidancename: guidanceNameController.text, medicalstatus: healthStatus, medicalstatusdescription: healthDescriberController.text);
+                          CircularIndicator.startCircularIndicator(context);
+                          var response = await FbAddChild.fbAddChild(
+                              name: nameController.text,
+                              dob: dobController.text,
+                              entrancedate: entranceDateController.text,
+                              gender: gender,
+                              adoptedstatus: adoptionStatus,
+                              guidancename: guidanceNameController.text,
+                              medicalstatus: healthStatus,
+                              medicalstatusdescription:
+                                  healthDescriberController.text);
                           // ignore: unnecessary_brace_in_string_interps
                           print("response in add child ${response}");
 
                           if (response["status"] == true) {
+                            CircularIndicator.stopCircularIndicator(context);
                             Toast.toastView(msg: "Child Added SuccessFully");
+
                             Navigator.pop(context);
                           } else {
+                            CircularIndicator.stopCircularIndicator(context);
                             Toast.toastView(msg: "failed");
                           }
-
                         }
                       },
                       child: Text("add Child"))

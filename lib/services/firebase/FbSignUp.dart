@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:little_miracles_orphange/services/firebase/FbAuth.dart';
+import 'package:little_miracles_orphange/services/firebase/FbGetDeviceToken.dart';
 
 class FbSignUp {
   static fbSignUp(
@@ -13,6 +14,8 @@ class FbSignUp {
       required yearllyIncome,
       required address,
       required marriedStatus}) async {
+    var notificstionToekn;
+
     try {
       // email id entered in firebase auth module
       var response =
@@ -25,12 +28,15 @@ class FbSignUp {
 
       // users data store in firestore
 
+      //  var pushToken =  await FirebaseMessaging.instance.getToken();
+
       CollectionReference userData =
           FirebaseFirestore.instance.collection("users");
 
       print("collection reference === $userData");
 
       try {
+        notificstionToekn = await FbGetDeviceToken.fbGetDeviceToken();
         var fireStoreResponse = await userData.add({
           "address": address,
           "adopted_child": 0,
@@ -45,13 +51,23 @@ class FbSignUp {
           "role": "user",
           "total_dnt_fund": 0,
           "yearly_income": 0,
+          'token': notificstionToekn
         });
 
         print(fireStoreResponse);
 
+        var pushNotificationToken = await FbGetDeviceToken.fbGetDeviceToken();
+
+        try {
+          CollectionReference collection =
+              FirebaseFirestore.instance.collection('push_tokens');
+          await collection
+              .doc(email)
+              .set({"email": email, "token": pushNotificationToken});
+        } catch (e) {}
+
         return {"status": true, "body": fireStoreResponse};
       } catch (e) {
-
         FbAuth.fbAuthRemove();
 
         return {"status": false, "error": e};

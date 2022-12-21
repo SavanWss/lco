@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_chat_bubble/flutter_basic_chat_bubble.dart';
-import 'package:little_miracles_orphange/commonwidget/drawers/UserDrawer.dart';
+import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/services/datastorerinutils/NoticeDataSaver.dart';
+// import 'package:little_miracles_orphange/services/firebase/FbGetNotice.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetNotice.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
-class NoticeUserScreen extends StatefulWidget {
-  const NoticeUserScreen({super.key});
+class MngNoticeAdminScreen extends StatefulWidget {
+  MngNoticeAdminScreen({super.key});
 
   @override
-  State<NoticeUserScreen> createState() => _NoticeUserScreenState();
+  State<MngNoticeAdminScreen> createState() => _MngNoticeAdminScreenState();
 }
 
-class _NoticeUserScreenState extends State<NoticeUserScreen> {
- Future getNoticeData() async {
+class _MngNoticeAdminScreenState extends State<MngNoticeAdminScreen> {
+  Future getNoticeData() async {
     var data = await FbGetNotice.fbGetAllNotice();
 
     return data;
@@ -26,7 +27,7 @@ class _NoticeUserScreenState extends State<NoticeUserScreen> {
   }
 
   @override
-  void didUpdateWidget(covariant NoticeUserScreen oldWidget) {
+  void didUpdateWidget(covariant MngNoticeAdminScreen oldWidget) {
     print("updated ia called");
     super.didUpdateWidget(oldWidget);
   }
@@ -40,8 +41,16 @@ class _NoticeUserScreenState extends State<NoticeUserScreen> {
         titleSpacing: 1,
         centerTitle: true,
       ),
-
-      drawer: UserDrawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.restorablePushNamed(
+              context, ScreenRoutes.adminAddNoticeScreen);
+        },
+        isExtended: true,
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      drawer: AdminDrawer(),
       body: FutureBuilder(
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -108,6 +117,7 @@ class _NoticeUserScreenState extends State<NoticeUserScreen> {
                                       organisedBy: uiData[index]
                                           ["organised_by"],
                                       uniqueId: uiData[index]["unique_id"]);
+
                                   print("object $index");
                                   Navigator.restorablePushNamed(context, ScreenRoutes.detailedNoticeScreen);
                                 },
@@ -123,5 +133,5 @@ class _NoticeUserScreenState extends State<NoticeUserScreen> {
           },
           future: getNoticeData()),
     );
-  } 
+  }
 }

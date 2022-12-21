@@ -55,7 +55,7 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.restorablePushNamed(
-              context, ScreenRoutes.adminAddChildScreen);
+              context, ScreenRoutes.adminAddNoticeScreen);
         },
         isExtended: true,
         child: Icon(Icons.add),
@@ -78,6 +78,9 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
 
                 print("your data === $data");
                 var uiData = data;
+                uiData.sort((a,b) {
+                  return Comparable.compare(a['child_number'], b['child_number']);
+                });
                 return RefreshIndicator(
                     onRefresh: () async {
                       setState(() {});

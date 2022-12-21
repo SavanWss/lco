@@ -1,3 +1,3 @@
 class ManageChildData {
-  static var selectedChildData = null;
+  static var selectedChildData = "null";
 }

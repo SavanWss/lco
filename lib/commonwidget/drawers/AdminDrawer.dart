@@ -88,7 +88,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminNoticescreen);
+                  Navigator.pushNamed(context, ScreenRoutes.adminManageNoticescreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Notice'),

@@ -3,13 +3,14 @@ class ScreenRoutes {
   static String welcomeScreen = "/welcome";
   static String signUpScreen = "/signup";
   static String signInScreen = "/signin";
-
+  static String detailedNoticeScreen = "/detailednoticescreen";
   
   // admin Screens
   static String adminDashboardScreen = "/admindashboard";
   static String adminUserScreen = "/adminuser";
   static String adminManageChildScreen = "/adminmanagechild";
-  static String adminNoticescreen = "/adminnotice";
+  static String adminManageNoticescreen = "/adminmanagenotice";
+  static String adminAddNoticeScreen = "/adminaddnotice";
   static String adminReportscreen = "/adminreports";
   static String adminAddChildScreen = "/adminaddchild";
   static String adminUpdateChildScreen = "/adminupdatechild";
