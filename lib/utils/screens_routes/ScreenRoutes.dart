@@ -22,5 +22,6 @@ class ScreenRoutes {
   static String userFeedBackScreen = "/userfeedbackscreen";
   static String userNoticeScreen = "/usernoticescreen";
   static String userReportScreen = "/userreportscreen";
+  static String userDonationScren = "/userdonationscreen";
 
 }

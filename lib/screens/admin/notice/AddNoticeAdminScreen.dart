@@ -238,6 +238,7 @@ class _AddNoticeAdminScreenState extends State<AddNoticeAdminScreen> {
                           if (response["status"] == true) {
                             Toast.toastView(msg: "Notice Added SuccessFully");
                             Navigator.pop(context);
+                            Navigator.pop(context);
                           } else {
                             Toast.toastView(msg: "failed");
                           }

@@ -55,7 +55,7 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.restorablePushNamed(
-              context, ScreenRoutes.adminAddNoticeScreen);
+              context, ScreenRoutes.adminAddChildScreen);
         },
         isExtended: true,
         child: Icon(Icons.add),

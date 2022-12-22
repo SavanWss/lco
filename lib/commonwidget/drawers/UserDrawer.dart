@@ -72,7 +72,7 @@ class _UserDrawerState extends State<UserDrawer> {
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.userAddFundScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userDonationScren);
                 },
                 leading: Icon(Icons.manage_accounts_outlined),
                 title: Text('make Donation'),

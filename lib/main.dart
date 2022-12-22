@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
+import 'package:little_miracles_orphange/screens/SegMent.dart';
 
 import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart';
 import 'package:little_miracles_orphange/screens/admin/child/UpdateChildAdmin.dart';
@@ -27,6 +28,7 @@ import 'package:little_miracles_orphange/screens/general/signup/SignUpScreen.dar
 import 'package:little_miracles_orphange/screens/user/addfund/AddFundUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/adoptchild/adoptChildUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/dashboard/DashUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/donation/DonationUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/feedback/FeedBackUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/notice/NoticeUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/reports/ResportUserScreen.dart';
@@ -127,9 +129,10 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.userFeedBackScreen: (context) => FeedBackUserScreen(),
         ScreenRoutes.userNoticeScreen: (context) => NoticeUserScreen(),
         ScreenRoutes.userReportScreen: (context) => ReportUserScreen(),
+        ScreenRoutes.userDonationScren:(context) => DonatioonUserScreen(),
 
         // testiong screens
-        "/sendnotification": (context) => NotificationScreen(),
+        "/sendnotification": (context) => SegMent(),
       },
     );
   }

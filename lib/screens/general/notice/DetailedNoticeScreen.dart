@@ -23,7 +23,8 @@ class _DetailedNoticeScreenState extends State<DetailedNoticeScreen> {
     ];
 
     List noticeDataList = [
-      NoticeDetails.noticeIssuedTime,
+      DateTime.fromMillisecondsSinceEpoch(NoticeDetails.noticeIssuedTime)
+          .toString(),
       NoticeDetails.noticeEventTitle,
       NoticeDetails.noticeEventTopic,
       NoticeDetails.noticeEventMode,

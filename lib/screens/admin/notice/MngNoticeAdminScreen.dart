@@ -119,7 +119,7 @@ class _MngNoticeAdminScreenState extends State<MngNoticeAdminScreen> {
                                       uniqueId: uiData[index]["unique_id"]);
 
                                   print("object $index");
-                                  Navigator.restorablePushNamed(context, ScreenRoutes.detailedNoticeScreen);
+                                  Navigator.pushNamed(context, ScreenRoutes.detailedNoticeScreen);
                                 },
                               );
                             })),
