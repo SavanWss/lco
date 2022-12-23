@@ -32,6 +32,8 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   flutter_smart_dialog: ^4.7.1
   measured_size: ^1.0.0
+  upi_india: ^3.0.1
+  profile: ^0.0.1
 
 dev_dependencies:
   flutter_test:
