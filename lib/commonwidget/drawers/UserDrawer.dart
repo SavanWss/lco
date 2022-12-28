@@ -64,7 +64,7 @@ class _UserDrawerState extends State<UserDrawer> {
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.userAdoptChildScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userManageAdoptChildScreen);
                 },
                 leading: Icon(Icons.manage_accounts),
                 title: Text('adopt child'),

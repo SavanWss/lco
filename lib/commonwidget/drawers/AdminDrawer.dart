@@ -40,7 +40,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 ),
               ),
 
-               Center(
+              Center(
                 child: DefaultTextStyle(
                   style: TextStyle(
                     fontSize: 24,
@@ -55,10 +55,10 @@ class _AdminDrawerState extends State<AdminDrawer> {
                 ),
               ),
 
-
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminDashboardScreen);
+                  Navigator.pushNamed(
+                      context, ScreenRoutes.adminDashboardScreen);
                 },
                 leading: Icon(Icons.dashboard),
                 title: Text('DashBoard'),
@@ -66,10 +66,19 @@ class _AdminDrawerState extends State<AdminDrawer> {
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminManageChildScreen);
+                  Navigator.pushNamed(
+                      context, ScreenRoutes.adminManageChildScreen);
                 },
                 leading: Icon(Icons.manage_accounts),
                 title: Text('ManageChild'),
+              ),
+
+              ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.adminReportscreen);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('Ad. Requets'),
               ),
 
               ListTile(
@@ -88,19 +97,18 @@ class _AdminDrawerState extends State<AdminDrawer> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminManageNoticescreen);
+                  Navigator.pushNamed(
+                      context, ScreenRoutes.adminManageNoticescreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Notice'),
               ),
-               ListTile(
-                onTap: ()  async{
+              ListTile(
+                onTap: () async {
                   try {
                     await FbSignOut.fbSignOut();
                     Toast.toastView(msg: "sign out successfully");
-                  } catch (e) {
-                    
-                  }
+                  } catch (e) {}
                   Navigator.popAndPushNamed(context, ScreenRoutes.signInScreen);
                 },
                 leading: Icon(Icons.settings),
@@ -122,7 +130,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
                   ),
                 ),
               )
-
             ],
           ),
         ),

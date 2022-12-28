@@ -47,7 +47,6 @@ class _DonatioonUserScreenState extends State<DonatioonUserScreen> {
   }
 
   var segmentFlag = 0;
-  Size wsize = Size.zero;
 
   @override
   Widget build(BuildContext context) {

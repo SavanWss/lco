@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:little_miracles_orphange/commonwidget/payment/App1.dart';
 import 'package:little_miracles_orphange/commonwidget/payment/PayMent.dart';
-import 'package:little_miracles_orphange/commonwidget/payment/PayMent2.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
 import 'package:little_miracles_orphange/screens/SegMent.dart';
 
@@ -18,18 +16,17 @@ import 'package:little_miracles_orphange/screens/admin/dashboard/DashAdminScreen
 import 'package:little_miracles_orphange/screens/admin/child/MngChildAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/AddNoticeAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/MngNoticeAdminScreen.dart';
-import 'package:little_miracles_orphange/screens/admin/notice/NoticeAdminScreen.dart';
+
 import 'package:little_miracles_orphange/screens/admin/reports/ReportsAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/users/userAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/general/notice/DetailedNoticeScreen.dart';
-
-import 'package:little_miracles_orphange/screens/notification/Notification.dart';
 
 import 'package:little_miracles_orphange/screens/general/signIn/SignInScreen.dart';
 import 'package:little_miracles_orphange/screens/general/signup/SignUpScreen.dart';
 
 import 'package:little_miracles_orphange/screens/user/addfund/AddFundUserScreen.dart';
-import 'package:little_miracles_orphange/screens/user/adoptchild/adoptChildUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/adoptchild/MngAdoptChildUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/adoptchild/adoptChildUserFormScreen.dart';
 import 'package:little_miracles_orphange/screens/user/dashboard/DashUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/donation/DonationUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/feedback/FeedBackUserScreen.dart';
@@ -39,6 +36,14 @@ import 'package:little_miracles_orphange/services/notification/local_notificatio
 
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 import 'package:little_miracles_orphange/utils/themes/PrimaryTheme.dart';
+
+
+// import 'package:little_miracles_orphange/commonwidget/payment/App1.dart';
+// import 'package:little_miracles_orphange/commonwidget/payment/PayMent2.dart';
+// import 'package:little_miracles_orphange/commonwidget/payment/TableView1.dart';
+// import 'package:little_miracles_orphange/screens/admin/notice/NoticeAdminScreen.dart';
+// import 'package:little_miracles_orphange/screens/notification/Notification.dart';
+
 
 // android notification channel
 
@@ -128,7 +133,9 @@ class _MyAppState extends State<MyApp> {
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),
         ScreenRoutes.userAddFundScreen: (context) => AddFundUserScreen(),
-        ScreenRoutes.userAdoptChildScreen: (context) => AdoptChildUserScreen(),
+        // ScreenRoutes.userManageAdoptChildScreen: (context) => userManageAdoptChildScreen()
+        ScreenRoutes.userManageAdoptChildScreen:(context) => MngAdoptChildUserScreen(),
+        ScreenRoutes.userAdoptChildFormScreen:(context) => AdoptChildFormUserScreen(),
         ScreenRoutes.userFeedBackScreen: (context) => FeedBackUserScreen(),
         ScreenRoutes.userNoticeScreen: (context) => NoticeUserScreen(),
         ScreenRoutes.userReportScreen: (context) => ReportUserScreen(),
@@ -136,7 +143,8 @@ class _MyAppState extends State<MyApp> {
 
         // testiong screens
         "/sendnotification": (context) => SegMent(),
-        "/payment":(context) => PayMent2()
+        "/payment":(context) => PayMent(),
+        // "/tableView":(context) => TableView1(title: "table view savan")
       },
     );
   }
