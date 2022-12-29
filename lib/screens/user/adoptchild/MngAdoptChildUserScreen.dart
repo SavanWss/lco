@@ -111,6 +111,7 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                     ),
                                   ),
                                   onTap: () async {
+                                    print("button is tapped");
                                     CircularIndicator.startCircularIndicator(context);
                                     var adRequest = await FbGetAdRequests
                                         .fgGetAdRequestAccordingStatus(
@@ -121,7 +122,8 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                     print(
                                         "your ad request on button tap == $adRequest");
 
-                                    if (adRequest == []) {
+                                    if (adRequest.length == 0) {
+                                      print("in if fff");
                                       Navigator.popAndPushNamed(
                                           context,
                                           ScreenRoutes
@@ -131,7 +133,7 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                           msg:
                                               "your old request is in under review");
                                       setState(() {
-                                        
+                                        CircularIndicator.stopCircularIndicator(context);
                                       });
                                     }
                                   },
