@@ -82,7 +82,12 @@ class _DonatioonUserScreenState extends State<DonatioonUserScreen> {
                     }),
               ),
             ),
-            if (segmentFlag == 0) ...[],
+
+            if (segmentFlag == 0) ...[
+              // this is fund section
+              
+            ],
+            
             if (segmentFlag == 1) ...[
               Padding(
                 padding: EdgeInsets.only(top: 70),

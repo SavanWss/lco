@@ -245,4 +245,4 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
           future: getData(),
         ));
   }
-}
+}                     
