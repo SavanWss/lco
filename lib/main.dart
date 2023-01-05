@@ -9,6 +9,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/commonwidget/payment/PayMent.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
 import 'package:little_miracles_orphange/screens/SegMent.dart';
+import 'package:little_miracles_orphange/screens/admin/adoptionrequest/MngAdRequestAdminScreen.dart';
 
 import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart';
 import 'package:little_miracles_orphange/screens/admin/child/UpdateChildAdmin.dart';
@@ -129,6 +130,7 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.adminReportscreen: (context) => ReposrtAdminScreen(),
         ScreenRoutes.adminAddChildScreen: (context) => AddChildAdmin(),
         ScreenRoutes.adminUpdateChildScreen: (context) => UpdateChildAdmin(),
+        ScreenRoutes.adminManageAdoptionRequestScreen:(context) => MngAdRequestAdminScreen()
 
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),

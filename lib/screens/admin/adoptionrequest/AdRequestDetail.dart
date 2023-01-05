@@ -72,11 +72,18 @@ class _AdRequestDetailState extends State<AdRequestDetail> {
               ),
             ),
             if (segmentFlag == 0) ...[
-              Center(
-                child: Text(""),
+              // for(int i = 0; i <) ...[]
+            ],
+            if (segmentFlag == 1) ...[
+              Column(
+                children: [
+
+                ],
               )
             ],
-            if (segmentFlag == 1) ...[],
+            if (segmentFlag == 2) ...[
+
+            ]
           ],
         ),
       ));

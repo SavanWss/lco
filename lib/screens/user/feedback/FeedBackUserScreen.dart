@@ -117,6 +117,7 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                             setState(() {
                               feedBackContoller.text = "";
                             });
+                            Navigator.pop(context);
                             print('SUCCESS!');
                           } catch (error) {
                             print(error.toString());

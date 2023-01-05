@@ -75,7 +75,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
 
               ListTile(
                 onTap: () {
-                  Navigator.pushNamed(context, ScreenRoutes.adminReportscreen);
+                  Navigator.pushNamed(context, ScreenRoutes.adminManageAdoptionRequestScreen);
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Ad. Requets'),
