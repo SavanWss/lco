@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.adminReportscreen: (context) => ReposrtAdminScreen(),
         ScreenRoutes.adminAddChildScreen: (context) => AddChildAdmin(),
         ScreenRoutes.adminUpdateChildScreen: (context) => UpdateChildAdmin(),
-        ScreenRoutes.adminManageAdoptionRequestScreen:(context) => MngAdRequestAdminScreen()
+        ScreenRoutes.adminManageAdoptionRequestScreen:(context) => MngAdRequestAdminScreen(),
 
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),
