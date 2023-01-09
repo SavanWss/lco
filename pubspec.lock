@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
-  auto_size_text:
-    dependency: transitive
-    description:
-      name: auto_size_text
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   avatar_glow:
     dependency: transitive
     description:
@@ -258,13 +251,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2+3"
-  flutter_beautiful_popup:
-    dependency: "direct main"
-    description:
-      name: flutter_beautiful_popup
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.0"
   flutter_custom_selector:
     dependency: "direct main"
     description:

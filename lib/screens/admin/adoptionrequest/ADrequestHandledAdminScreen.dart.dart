@@ -13,13 +13,37 @@ class _ADrequestHandledAdminScreenDartState
     extends State<ADrequestHandledAdminScreenDart> {
   @override
   Widget build(BuildContext context) {
- final _controller00 = ValueNotifier<bool>(false);
- 
-    return SafeArea(
-        child: Column(
-      children: [
-    
-      ],
-    ));
+    var switchFlag = true;
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: SafeArea(
+          child: Column(
+        children: [
+          Switch(value: switchFlag, onChanged: ((value) {
+            // setState(() {
+              // if (switchFlag == true) {
+              //   switchFlag = false;
+              // } else {
+              //   switchFlag = true;
+              // }
+            // });
+          })),
+
+          if(switchFlag) ...[
+            Center(
+              child: Text("true"),
+            )
+          ],
+
+          if(!switchFlag) ...[
+            Center(
+              child: Text("False"),
+            )
+          ]
+
+        ],
+      )),
+    );
   }
 }

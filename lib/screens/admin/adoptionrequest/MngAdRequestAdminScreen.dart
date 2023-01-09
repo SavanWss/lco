@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_beautiful_popup/main.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetAdRequest.dart';
+import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
+import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class MngAdRequestAdminScreen extends StatefulWidget {
   const MngAdRequestAdminScreen({Key? key}) : super(key: key);
@@ -133,6 +134,10 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                     DataCell(Text(
                                         '${pendingRequestList[i]["adoption_description"]}')),
                                   ],
+                                  onLongPress: () {
+                                    AdoptionRequest.adoptionRequest = pendingRequestList[i];
+                                    Navigator.restorablePushNamed(context, ScreenRoutes.adminAdReqResponseScreen);
+                                  },
                                 )
                               ]
                             ]),
