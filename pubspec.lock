@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  animated_toggle_switch:
+    dependency: "direct main"
+    description:
+      name: animated_toggle_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.1"
   archive:
     dependency: transitive
     description:
@@ -36,6 +43,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   avatar_glow:
     dependency: transitive
     description:
@@ -230,6 +244,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_advanced_switch:
+    dependency: "direct main"
+    description:
+      name: flutter_advanced_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   flutter_basic_chat_bubble:
     dependency: "direct main"
     description:
@@ -237,6 +258,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2+3"
+  flutter_beautiful_popup:
+    dependency: "direct main"
+    description:
+      name: flutter_beautiful_popup
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.7.0"
   flutter_custom_selector:
     dependency: "direct main"
     description:

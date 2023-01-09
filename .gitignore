@@ -42,3 +42,58 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+
+# koniou'h
+
+
+  
+
+                   
+
+                 
+
+                      // rejected requests
+                      if (segmentFlag == 2) ...[
+                        for (var i = 0;
+                            i < rejectedRequestList.length;
+                            i++) ...[
+                          Card(
+                            child: new Container(
+                              padding: new EdgeInsets.all(32.0),
+                              color: Color.fromARGB(133, 171, 35, 35),
+                              child: new Column(
+                                children: <Widget>[
+                                  new Text(
+                                    '${rejectedRequestList[i]["request_status"]}',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        letterSpacing: 1,
+                                        wordSpacing: 1,
+                                        fontSize: 18),
+                                  ),
+                                  new Text(
+                                    '${(rejectedRequestList[i]["rejection_reason"] == "") ? "no reason" : rejectedRequestList[i]["rejection_reason"]}',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        letterSpacing: 1,
+                                        wordSpacing: 1,
+                                        fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ]
+                      ]
+                    ],
+                  ),
+                ));
+              }
+            }
+   

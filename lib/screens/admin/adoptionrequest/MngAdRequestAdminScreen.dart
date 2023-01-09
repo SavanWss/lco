@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetAdRequest.dart';
@@ -25,6 +26,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
 
   getData() async {
     var data = await FbGetAdRequests.fbGetAdRequests();
+    print("your requests data === $data");
     return data;
   }
 
@@ -32,6 +34,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           shadowColor: Color.fromARGB(48, 208, 46, 237),
@@ -45,10 +48,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Center(
-                  child: Text(
-                    '${snapshot.error} occurred',
-                    style: TextStyle(fontSize: 18),
-                  ),
+                  child: Text("oops error"),
                 );
               } else if (snapshot.hasData) {
                 var data = snapshot.data as List<dynamic>;
@@ -71,6 +71,9 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                     default:
                   }
                 }
+
+                print(
+                    "your Rejected request length size ${rejectedRequestList.length}");
 
                 return SafeArea(
                     child: SingleChildScrollView(
@@ -100,122 +103,130 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
 
                       // pending requests
                       if (segmentFlag == 0) ...[
-                        for (var i = 0; i < pendingRequestList.length; i++) ...[
-                          Card(
-                            child: new Container(
-                              padding: new EdgeInsets.all(32.0),
-                              color: Color.fromARGB(255, 255, 216, 87),
-                              child: new Column(
-                                children: <Widget>[
-                                  new Text(
-                                    '${pendingRequestList[i]["request_status"]}',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  ),
-                                  new Text(
-                                    'your request under review',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  )
-                                ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
+                            child: DataTable(columns: [
+                              DataColumn(
+                                label: Text('email'),
                               ),
-                            ),
+                              DataColumn(
+                                label: Text('name'),
+                              ),
+                              DataColumn(
+                                label: Text('reason'),
+                              ),
+                            ], rows: [
+                              for (var i = 0;
+                                  i < pendingRequestList.length;
+                                  i++) ...[
+                                DataRow(
+                                  cells: [
+                                    DataCell(Text(
+                                      '${pendingRequestList[i]["user_email"]}',
+                                      softWrap: true,
+                                      style: TextStyle(fontSize: 10),
+                                    )),
+                                    DataCell(Text(
+                                        '${pendingRequestList[i]["user_name"]}')),
+                                    DataCell(Text(
+                                        '${pendingRequestList[i]["adoption_description"]}')),
+                                  ],
+                                )
+                              ]
+                            ]),
                           ),
-                        ]
+                        )
                       ],
 
                       // approved requests
                       if (segmentFlag == 1) ...[
-                        for (var i = 0; i < accepedRequestList.length; i++) ...[
-                          Card(
-                            child: new Container(
-                              padding: new EdgeInsets.all(32.0),
-                              color: Color.fromARGB(133, 142, 227, 141),
-                              child: new Column(
-                                children: <Widget>[
-                                  new Text(
-                                    '${accepedRequestList[i]["request_status"]}',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  ),
-                                  new Text(
-                                    '${(rejectedRequestList[i]["rejection_reason"] == "") ? "no reason" : rejectedRequestList[i]["rejection_reason"]}',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  )
-                                ],
-                              ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(columns: [
+                            DataColumn(
+                              label: Text('email'),
                             ),
-                          ),
-                        ]
+                            DataColumn(
+                              label: Text('name'),
+                            ),
+                            DataColumn(
+                              label: Text('reason'),
+                            ),
+                          ], rows: [
+                            for (var i = 0;
+                                i < accepedRequestList.length;
+                                i++) ...[
+                              DataRow(
+                                cells: [
+                                  DataCell(Text(
+                                    '${accepedRequestList[i]["user_email"]}',
+                                    softWrap: true,
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Text(
+                                      '${accepedRequestList[i]["user_name"]}')),
+                                  DataCell(Text(
+                                      '${accepedRequestList[i]["child_number"]}')),
+                                ],
+                          
+                              )
+                            ]
+                          ]),
+                        )
                       ],
 
-                      // rejected requests
                       if (segmentFlag == 2) ...[
-                        for (var i = 0;
-                            i < rejectedRequestList.length;
-                            i++) ...[
-                          Card(
-                            child: new Container(
-                              padding: new EdgeInsets.all(32.0),
-                              color: Color.fromARGB(133, 171, 35, 35),
-                              child: new Column(
-                                children: <Widget>[
-                                  new Text(
-                                    '${rejectedRequestList[i]["request_status"]}',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  ),
-                                  new Text(
-                                    '${(rejectedRequestList[i]["rejection_reason"] == "") ? "no reason" : rejectedRequestList[i]["rejection_reason"]}',
-                                    softWrap: true,
-                                    style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        letterSpacing: 1,
-                                        wordSpacing: 1,
-                                        fontSize: 18),
-                                  )
-                                ],
-                              ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(columns: [
+                            DataColumn(
+                              label: Text('email'),
                             ),
-                          ),
-                        ]
+                            DataColumn(
+                              label: Text('name'),
+                            ),
+                            DataColumn(
+                              label: Text('reason'),
+                            ),
+                          ], rows: [
+                            for (var i = 0;
+                                i < rejectedRequestList.length;
+                                i++) ...[
+                              DataRow(
+                                cells: [
+                                  DataCell(Text(
+                                    '${rejectedRequestList[i]["user_email"]}',
+                                    softWrap: true,
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Text(
+                                      '${rejectedRequestList[i]["user_name"]}')),
+                                  DataCell(Text(
+                                      '${rejectedRequestList[i]["rejection_reason"]}')),
+                                ],
+                                onLongPress: () {
+                                  print('${rejectedRequestList[i]}');
+                                },
+                              )
+                            ]
+                          ]),
+                        )
                       ]
                     ],
                   ),
                 ));
               }
             }
+            // Displaying LoadingSpinner to indicate waiting state
             return Center(
-              child: CircularIndicator.startCircularIndicator(context),
+              child: CircularProgressIndicator(),
             );
           },
+
+          // Future that needs to be resolved
+          // inorder to display something on the Canvas
           future: getData(),
         ));
   }
