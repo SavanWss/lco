@@ -26,10 +26,8 @@ class _SignInScreenState extends State<SignInScreen> {
   final passwordController = TextEditingController();
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
-
-
   }
 
   @override
@@ -128,7 +126,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     if (_FormKey.currentState!.validate()) {
                       CircularIndicator.startCircularIndicator(context);
 
-                      bool interNetConnectionFlag = await InterNetConnectivityChecker.interNetConnectivityChecker();
+                      bool interNetConnectionFlag =
+                          await InterNetConnectivityChecker
+                              .interNetConnectivityChecker();
                       print(interNetConnectionFlag);
                       if (interNetConnectionFlag == false) {
                         Toast.toastView(msg: "connect to network!!!");
@@ -145,6 +145,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       print("login === $login");
                       if (login["status"] == true) {
                         var userData = login["data"][0];
+                        print("user == ${userData}");
+                        if (userData["profession"] == null || userData["married_status"] == null || userData["yearly_income"] == null) {
+                        userData["profession"] = userData["married_status"] = "";
+                        userData["yearly_income"] = 0;
+
+                        }
+
+                   
 
                         LogInDataSaver.logInDataSave(
                             name: userData["name"],

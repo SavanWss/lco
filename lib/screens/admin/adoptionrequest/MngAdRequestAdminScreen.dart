@@ -7,6 +7,7 @@ import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicato
 import 'package:little_miracles_orphange/services/firebase/FbGetAdRequest.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetUser.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
+import 'package:little_miracles_orphange/utils/requesteduserdetail/RequestedUserDetail.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 import 'package:tb_custom_dialog_box/tb_custom_dialog_box.dart';
 
@@ -146,12 +147,15 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                         DataCell(Text(
                                             '${pendingRequestList[i]["adoption_description"]}')),
                                       ],
-                                      onLongPress: () {
+                                      onLongPress: () async{
                                         AdoptionRequest.adoptionRequest =
                                             pendingRequestList[i];
                                         print(AdoptionRequest
                                             .adoptionRequest["user_email"]);
                                         // Navigator.restorablePushNamed(context, ScreenRoutes.adminAdReqResponseScreen);
+                                        var user = await FbGetUser.fbGetUsreById(email: pendingRequestList[i]["user_email"]);
+                                        print("user == ${user}");
+                                        RequestedUserDetail.userDetails = user[0];
                                         DialogUtils.showCustomDialog(context,
                                             title: "title");
                                       },
