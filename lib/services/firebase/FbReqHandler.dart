@@ -54,6 +54,24 @@ class FbReqHandler {
       return {"status": false, "body": e};
     }
   }
+
+  static fbRejectRequest({required requestedUser, required rejectionReason}) async{
+    try {
+
+       var collection2 = FirebaseFirestore.instance.collection('adoption_process_detail');
+
+      print("requested user 111111111 == ${requestedUser}");
+      print("requested rejection 111111111 == ${rejectionReason}");
+        collection2
+            .doc(requestedUser)
+            .set({"request_status": "Rejected", "rejection_reason": rejectionReason,}, SetOptions(merge: true));
+  
+
+       return {"status": true, "body": "success"};
+    } catch (e) {
+      return {"status": false, "body": e};
+    }
+  }
 }
 
 //  .set({"1":"s"}, SetOptions(merge: true));

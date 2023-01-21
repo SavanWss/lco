@@ -25,6 +25,12 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -50,6 +56,7 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
 
                 List pendingRequestList = [];
                 List rejectedRequestList = [];
+                List approvedRequestList = [];
 
                 for (var i = 0; i < data.length; i++) {
                   if (data[i]["request_status"] == "Pending") {
@@ -62,6 +69,18 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                     rejectedRequestList.add(data[i]);
                   }
                 }
+
+                for (var i = 0; i < data.length; i++) {
+                  if (data[i]["request_status"] == "Accepted") {
+                    rejectedRequestList.add(data[i]);
+                  }
+                }
+
+
+    if( approvedRequestList.length != 0) {
+      Navigator.of(context).pop();
+      Toast.toastView(msg: "you have already adopt the child");
+    }
 
                 return RefreshIndicator(
                     child: SingleChildScrollView(
@@ -80,7 +99,10 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                 ),
                               ),
                               Padding(padding: EdgeInsets.all(15)),
-                              if (pendingRequestList.length == 0) ...[
+
+                          
+
+                              if (pendingRequestList.length == 0 && approvedRequestList.length != 0) ...[
                                 GestureDetector(
                                   child: Card(
                                     child: new Container(
@@ -112,7 +134,8 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                   ),
                                   onTap: () async {
                                     print("button is tapped");
-                                    CircularIndicator.startCircularIndicator(context);
+                                    CircularIndicator.startCircularIndicator(
+                                        context);
                                     var adRequest = await FbGetAdRequests
                                         .fgGetAdRequestAccordingStatus(
                                             useremail:
@@ -133,7 +156,8 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                           msg:
                                               "your old request is in under review");
                                       setState(() {
-                                        CircularIndicator.stopCircularIndicator(context);
+                                        CircularIndicator.stopCircularIndicator(
+                                            context);
                                       });
                                     }
                                   },
@@ -245,4 +269,4 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
           future: getData(),
         ));
   }
-}                     
+}

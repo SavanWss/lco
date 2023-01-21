@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:little_miracles_orphange/commonwidget/dialogues/DialogueRejectingReq.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
 import 'package:little_miracles_orphange/utils/requesteduserdetail/RequestedUserDetail.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
@@ -24,18 +25,22 @@ class DialogUtils {
             title: Text("Adoption request"),
             content: /* Here add your custom widget  */ Padding(
               padding: EdgeInsets.fromLTRB(10, 40, 0, 10),
-              child: Column(
+              child: SizedBox(
+                height: 500,
+                child: Column(
               children: [
                 Text(
                 RequestedUserDetail.userDetails["email"]),
                 SizedBox(height: 10,),
                 Text(
-                RequestedUserDetail.userDetails["profession"]),
+                  (RequestedUserDetail.userDetails["profession"] == null)? "profession not confirmed": "${RequestedUserDetail.userDetails["profession"]}"
+                ),
                  SizedBox(height: 10,),
                 Text(
-                AdoptionRequest.adoptionRequest["married_status"]),
+                 (RequestedUserDetail.userDetails["married_status"] == null)? "maritial status not confirmed": "${RequestedUserDetail.userDetails["married_status"]}")
               ],
             ),
+              )
             ),
             actions: <Widget>[
  
@@ -47,7 +52,7 @@ class DialogUtils {
                   ),
                   ElevatedButton(
                       child: Text(rejectBtnText),
-                      onPressed: () => Navigator.pop(context))
+                      onPressed: () =>DialogueRejectingReq.showCustomDialog(context, title: title))
 
             ],
           );

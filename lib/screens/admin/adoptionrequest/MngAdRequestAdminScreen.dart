@@ -148,6 +148,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                             '${pendingRequestList[i]["adoption_description"]}')),
                                       ],
                                       onLongPress: () async{
+                                        CircularIndicator.startCircularIndicator(context);
                                         AdoptionRequest.adoptionRequest =
                                             pendingRequestList[i];
                                         print(AdoptionRequest
@@ -156,6 +157,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                         var user = await FbGetUser.fbGetUsreById(email: pendingRequestList[i]["user_email"]);
                                         print("user == ${user}");
                                         RequestedUserDetail.userDetails = user[0];
+                                        CircularIndicator.stopCircularIndicator(context);
                                         DialogUtils.showCustomDialog(context,
                                             title: "title");
                                       },

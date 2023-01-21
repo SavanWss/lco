@@ -62,13 +62,26 @@ class _UserDrawerState extends State<UserDrawer> {
                 title: Text('DashBoard'),
               ),
 
-              ListTile(
+              if(LoggedInDetails.userAdoptedChild == 0) ...[
+                        ListTile(
                 onTap: () {
                   Navigator.pushNamed(context, ScreenRoutes.userManageAdoptChildScreen);
                 },
                 leading: Icon(Icons.manage_accounts),
                 title: Text('adopt child'),
               ),
+              ],
+
+            if(LoggedInDetails.userAdoptedChild > 0) ...[
+                        ListTile(
+                onTap: () {
+                  // Navigator.pushNamed(context, ScreenRoutes.userManageAdoptChildScreen);
+                },
+                leading: Icon(Icons.manage_accounts),
+                title: Text('my child'),
+              ),
+              ],
+
 
               ListTile(
                 onTap: () {

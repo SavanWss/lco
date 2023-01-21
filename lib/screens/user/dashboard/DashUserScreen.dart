@@ -16,16 +16,7 @@ class _DashUserScreenState extends State<DashUserScreen> {
       body:  SafeArea(child: SingleChildScrollView(
         child: Column(
           children: [
-               for(int i = 0; i < 5; i++) ...[Text(" data $i")],
-
-           ListView.builder(itemCount: 60,
-           physics: NeverScrollableScrollPhysics(),
-           shrinkWrap: true,
-          //  dragStartBehavior: DragStartBehavior.start,
-          scrollDirection: Axis.vertical,
-           itemBuilder: (context, index) {
-             return Text("data in container $index ");
-           },)
+              
 
           ],
         ),
