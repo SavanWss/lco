@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:little_miracles_orphange/commonwidget/dialogues/DialogUtils.dart';
+import 'package:little_miracles_orphange/commonwidget/dialogues/DialogueApprovedDetails.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetAdRequest.dart';
+import 'package:little_miracles_orphange/services/firebase/FbGetUser.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
+import 'package:tb_custom_dialog_box/tb_custom_dialog_box.dart';
 
 class MngAdRequestAdminScreen extends StatefulWidget {
   const MngAdRequestAdminScreen({Key? key}) : super(key: key);
@@ -31,11 +35,16 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
     return data;
   }
 
+  getuserSpecificData() async {
+    var data = await FbGetUser.fbGetUsreById(email: AdoptionRequest.adoptionRequest["user_email"]);
+    print("your requests data === $data");
+    return data;
+  }
+
   var segmentFlag = 0;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           shadowColor: Color.fromARGB(48, 208, 46, 237),
@@ -76,152 +85,162 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                 print(
                     "your Rejected request length size ${rejectedRequestList.length}");
 
-                return SafeArea(
-                    child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: CupertinoSlidingSegmentedControl(
-                              backgroundColor: Color.fromRGBO(82, 21, 72, 1),
-                              thumbColor: Color.fromARGB(224, 175, 146, 175),
-                              padding: EdgeInsets.all(8),
-                              groupValue: segmentFlag,
-                              children: {
-                                0: buildSegment("Pending"),
-                                1: buildSegment("Approved"),
-                                2: buildSegment("Rejecting")
-                              },
-                              onValueChanged: (value) {
-                                setState(() {
-                                  segmentFlag = value!;
-                                  print("segment flag == $value");
-                                });
-                              }),
-                        ),
-                      ),
-
-                      // pending requests
-                      if (segmentFlag == 0) ...[
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
-                            child: DataTable(columns: [
-                              DataColumn(
-                                label: Text('email'),
-                              ),
-                              DataColumn(
-                                label: Text('name'),
-                              ),
-                              DataColumn(
-                                label: Text('reason'),
-                              ),
-                            ], rows: [
-                              for (var i = 0;
-                                  i < pendingRequestList.length;
-                                  i++) ...[
-                                DataRow(
-                                  cells: [
-                                    DataCell(Text(
-                                      '${pendingRequestList[i]["user_email"]}',
-                                      softWrap: true,
-                                      style: TextStyle(fontSize: 10),
-                                    )),
-                                    DataCell(Text(
-                                        '${pendingRequestList[i]["user_name"]}')),
-                                    DataCell(Text(
-                                        '${pendingRequestList[i]["adoption_description"]}')),
-                                  ],
-                                  onLongPress: () {
-                                    AdoptionRequest.adoptionRequest = pendingRequestList[i];
-                                    Navigator.restorablePushNamed(context, ScreenRoutes.adminAdReqResponseScreen);
+                return RefreshIndicator(
+                    child: SafeArea(
+                        child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: CupertinoSlidingSegmentedControl(
+                                  backgroundColor:
+                                      Color.fromRGBO(82, 21, 72, 1),
+                                  thumbColor:
+                                      Color.fromARGB(224, 175, 146, 175),
+                                  padding: EdgeInsets.all(8),
+                                  groupValue: segmentFlag,
+                                  children: {
+                                    0: buildSegment("Pending"),
+                                    1: buildSegment("Approved"),
+                                    2: buildSegment("Rejecting")
                                   },
-                                )
-                              ]
-                            ]),
+                                  onValueChanged: (value) {
+                                    setState(() {
+                                      segmentFlag = value!;
+                                      print("segment flag == $value");
+                                    });
+                                  }),
+                            ),
                           ),
-                        )
-                      ],
 
-                      // approved requests
-                      if (segmentFlag == 1) ...[
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(columns: [
-                            DataColumn(
-                              label: Text('email'),
-                            ),
-                            DataColumn(
-                              label: Text('name'),
-                            ),
-                            DataColumn(
-                              label: Text('reason'),
-                            ),
-                          ], rows: [
-                            for (var i = 0;
-                                i < accepedRequestList.length;
-                                i++) ...[
-                              DataRow(
-                                cells: [
-                                  DataCell(Text(
-                                    '${accepedRequestList[i]["user_email"]}',
-                                    softWrap: true,
-                                    style: TextStyle(fontSize: 10),
-                                  )),
-                                  DataCell(Text(
-                                      '${accepedRequestList[i]["user_name"]}')),
-                                  DataCell(Text(
-                                      '${accepedRequestList[i]["child_number"]}')),
-                                ],
-                          
-                              )
-                            ]
-                          ]),
-                        )
-                      ],
+                          // pending requests
+                          if (segmentFlag == 0) ...[
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
+                                child: DataTable(columns: [
+                                  DataColumn(
+                                    label: Text('email'),
+                                  ),
+                                  DataColumn(
+                                    label: Text('name'),
+                                  ),
+                                  DataColumn(
+                                    label: Text('reason'),
+                                  ),
+                                ], rows: [
+                                  for (var i = 0;
+                                      i < pendingRequestList.length;
+                                      i++) ...[
+                                    DataRow(
+                                      cells: [
+                                        DataCell(Text(
+                                          '${pendingRequestList[i]["user_email"]}',
+                                          softWrap: true,
+                                          style: TextStyle(fontSize: 10),
+                                        )),
+                                        DataCell(Text(
+                                            '${pendingRequestList[i]["user_name"]}')),
+                                        DataCell(Text(
+                                            '${pendingRequestList[i]["adoption_description"]}')),
+                                      ],
+                                      onLongPress: () {
+                                        AdoptionRequest.adoptionRequest =
+                                            pendingRequestList[i];
+                                        print(AdoptionRequest
+                                            .adoptionRequest["user_email"]);
+                                        // Navigator.restorablePushNamed(context, ScreenRoutes.adminAdReqResponseScreen);
+                                        DialogUtils.showCustomDialog(context,
+                                            title: "title");
+                                      },
+                                    )
+                                  ]
+                                ]),
+                              ),
+                            )
+                          ],
 
-                      if (segmentFlag == 2) ...[
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(columns: [
-                            DataColumn(
-                              label: Text('email'),
-                            ),
-                            DataColumn(
-                              label: Text('name'),
-                            ),
-                            DataColumn(
-                              label: Text('reason'),
-                            ),
-                          ], rows: [
-                            for (var i = 0;
-                                i < rejectedRequestList.length;
-                                i++) ...[
-                              DataRow(
-                                cells: [
-                                  DataCell(Text(
-                                    '${rejectedRequestList[i]["user_email"]}',
-                                    softWrap: true,
-                                    style: TextStyle(fontSize: 10),
-                                  )),
-                                  DataCell(Text(
-                                      '${rejectedRequestList[i]["user_name"]}')),
-                                  DataCell(Text(
-                                      '${rejectedRequestList[i]["rejection_reason"]}')),
-                                ],
-                                onLongPress: () {
-                                  print('${rejectedRequestList[i]}');
-                                },
-                              )
-                            ]
-                          ]),
-                        )
-                      ]
-                    ],
-                  ),
-                ));
+                          // approved requests
+                          if (segmentFlag == 1) ...[
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(columns: [
+                                DataColumn(
+                                  label: Text('email'),
+                                ),
+                                DataColumn(
+                                  label: Text('name'),
+                                ),
+                                DataColumn(
+                                  label: Text('child'),
+                                ),
+                              ], rows: [
+                                for (var i = 0;
+                                    i < accepedRequestList.length;
+                                    i++) ...[
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text(
+                                        '${accepedRequestList[i]["user_email"]}',
+                                        softWrap: true,
+                                        style: TextStyle(fontSize: 10),
+                                      )),
+                                      DataCell(Text(
+                                          '${accepedRequestList[i]["user_name"]}')),
+                                      DataCell(Text(
+                                          '${accepedRequestList[i]["child_number"]}')),
+                                    ],
+                                    onLongPress: () {
+                                      DialogueApprovedDetails.showCustomDialog(context, title: "title");
+                                    },
+                                  )
+                                ]
+                              ]),
+                            )
+                          ],
+
+                          if (segmentFlag == 2) ...[
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(columns: [
+                                DataColumn(
+                                  label: Text('email'),
+                                ),
+                                DataColumn(
+                                  label: Text('name'),
+                                ),
+                                DataColumn(
+                                  label: Text('reason'),
+                                ),
+                              ], rows: [
+                                for (var i = 0;
+                                    i < rejectedRequestList.length;
+                                    i++) ...[
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text(
+                                        '${rejectedRequestList[i]["user_email"]}',
+                                        softWrap: true,
+                                        style: TextStyle(fontSize: 10),
+                                      )),
+                                      DataCell(Text(
+                                          '${rejectedRequestList[i]["user_name"]}')),
+                                      DataCell(Text(
+                                          '${rejectedRequestList[i]["rejection_reason"]}')),
+                                    ],
+                                  )
+                                ]
+                              ]),
+                            )
+                          ]
+                        ],
+                      ),
+                    )),
+                    onRefresh: (() async {
+                      setState(() {});
+                    }));
               }
             }
             // Displaying LoadingSpinner to indicate waiting state

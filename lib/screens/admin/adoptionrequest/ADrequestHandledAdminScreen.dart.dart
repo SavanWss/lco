@@ -16,34 +16,19 @@ class _ADrequestHandledAdminScreenDartState
     var switchFlag = true;
 
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-          child: Column(
-        children: [
-          Switch(value: switchFlag, onChanged: ((value) {
-            // setState(() {
-              // if (switchFlag == true) {
-              //   switchFlag = false;
-              // } else {
-              //   switchFlag = true;
-              // }
-            // });
-          })),
-
-          if(switchFlag) ...[
-            Center(
-              child: Text("true"),
-            )
+      appBar: AppBar(
+          shadowColor: Color.fromARGB(48, 208, 46, 237),
+          title: Text("ad-request"),
+          titleSpacing: 1,
+          centerTitle: true,
+        ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 40),
           ],
-
-          if(!switchFlag) ...[
-            Center(
-              child: Text("False"),
-            )
-          ]
-
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

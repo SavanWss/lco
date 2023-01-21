@@ -39,6 +39,7 @@ dependencies:
   animated_toggle_switch: ^0.6.1
   flutter_advanced_switch: ^3.0.1
   auto_size_text: ^3.0.0
+  tb_custom_dialog_box: ^0.0.3
 
 dev_dependencies:
   flutter_test:

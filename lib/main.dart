@@ -10,6 +10,8 @@ import 'package:little_miracles_orphange/commonwidget/payment/PayMent.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
 import 'package:little_miracles_orphange/screens/SegMent.dart';
 import 'package:little_miracles_orphange/screens/admin/adoptionrequest/ADrequestHandledAdminScreen.dart.dart';
+import 'package:little_miracles_orphange/screens/admin/adoptionrequest/AdReqAceeptAdminScreen.dart';
+import 'package:little_miracles_orphange/screens/admin/adoptionrequest/AdReqRejectAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/adoptionrequest/MngAdRequestAdminScreen.dart';
 
 import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart';
@@ -133,6 +135,8 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.adminUpdateChildScreen: (context) => UpdateChildAdmin(),
         ScreenRoutes.adminManageAdoptionRequestScreen:(context) => MngAdRequestAdminScreen(),
         ScreenRoutes.adminAdReqResponseScreen:(context) => ADrequestHandledAdminScreenDart(),
+        ScreenRoutes.adminAdAceeptReqScreen:(context) => AdReqAceeptAdminScreen(),
+        ScreenRoutes.adminAdRejectReqScreen:(context) => AdReqRejectAdminScreen(),
 
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),

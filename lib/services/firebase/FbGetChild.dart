@@ -22,4 +22,17 @@ class FbGetChild {
 
     return data;
   }
+
+  static fbGetChildByAquisition({required aquisitionType}) async {
+    QuerySnapshot snapShot = await FirebaseFirestore.instance
+        .collection("childs")
+        .where("adopted_status", isEqualTo: aquisitionType)
+        .get();
+    List<Object?> data = snapShot.docs.map((e) {
+      return e.data();
+    }).toList();
+
+    return data;
+  }
+
 }

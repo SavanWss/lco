@@ -16,6 +16,9 @@ class ScreenRoutes {
   static String adminUpdateChildScreen = "/adminupdatechild";
   static String adminManageAdoptionRequestScreen = "/adminmanageadoptrequest";
   static String adminAdReqResponseScreen = "adminadoptrequestresponse";
+  static String adminAdAceeptReqScreen = "adminadoptrequestaccept";
+  static String adminAdRejectReqScreen = "adminadoptrequestreject";
+  
 
   // user Screens
   static String userDashboardScreen = "/userdashboard";
