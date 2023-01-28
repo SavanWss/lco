@@ -23,7 +23,7 @@ class FbAddAdRequests {
           "rejection_reason": "" 
         });
 
-        return {"status": true,};
+        return {"status": true};
       } catch (e) {
         return {"status": false, "error": e};
       }

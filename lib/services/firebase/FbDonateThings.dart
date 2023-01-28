@@ -11,6 +11,7 @@ class FbDonateThings {
     try {
       // users data store in firestore
 
+      // ignore: non_constant_identifier_names
       CollectionReference DonateThingsData =
           FirebaseFirestore.instance.collection("things_donations");
 

@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/dialogues/DialogueConfermation.dart';
-import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetChild.dart';
 import 'package:little_miracles_orphange/services/firebase/FbReqHandler.dart';
@@ -124,7 +123,7 @@ adopted :    ${uiData[i]["adopted_status"]}
                                 ),
                                 onTap: () async{
                                   print(uiData[i]["child_number"]);
-                                  DialogueConfermation.showCustomDialog(context, title: "title", unNamed: () async {
+                                  DialogueConfermation.showCustomDialog(context, unNamed: () async {
                                    var response = await FbReqHandler.fbAcceptRequest(childId: uiData[i]["child_number"], requestedUser: AdoptionRequest.adoptionRequest["user_email"]);
                                     print(response);
                                     if(response["status"] == true) {

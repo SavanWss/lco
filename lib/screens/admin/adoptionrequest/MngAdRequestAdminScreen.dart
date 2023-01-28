@@ -8,8 +8,6 @@ import 'package:little_miracles_orphange/services/firebase/FbGetAdRequest.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetUser.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
 import 'package:little_miracles_orphange/utils/requesteduserdetail/RequestedUserDetail.dart';
-import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
-import 'package:tb_custom_dialog_box/tb_custom_dialog_box.dart';
 
 class MngAdRequestAdminScreen extends StatefulWidget {
   const MngAdRequestAdminScreen({Key? key}) : super(key: key);
@@ -155,11 +153,9 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                             .adoptionRequest["user_email"]);
                                         // Navigator.restorablePushNamed(context, ScreenRoutes.adminAdReqResponseScreen);
                                         var user = await FbGetUser.fbGetUsreById(email: pendingRequestList[i]["user_email"]);
-                                        print("user == ${user}");
                                         RequestedUserDetail.userDetails = user[0];
                                         CircularIndicator.stopCircularIndicator(context);
-                                        DialogUtils.showCustomDialog(context,
-                                            title: "title");
+                                        DialogUtils.showCustomDialog(context);
                                       },
                                     )
                                   ]
@@ -199,7 +195,7 @@ class _MngAdRequestAdminScreenState extends State<MngAdRequestAdminScreen> {
                                           '${accepedRequestList[i]["child_number"]}')),
                                     ],
                                     onLongPress: () {
-                                      DialogueApprovedDetails.showCustomDialog(context, title: "title");
+                                      DialogueApprovedDetails.showCustomDialog(context);
                                     },
                                   )
                                 ]

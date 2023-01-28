@@ -1,11 +1,10 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/firebase/FbReqHandler.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
-import 'package:little_miracles_orphange/utils/requesteduserdetail/RequestedUserDetail.dart';
-import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class DialogueRejectingReq {
   static DialogueRejectingReq _instance = new DialogueRejectingReq.internal();
@@ -16,7 +15,6 @@ class DialogueRejectingReq {
 
   static void showCustomDialog(
     BuildContext context, {
-    @required String title = "",
     String acceptBtnText = "Reject",
   }) {
     showDialog(

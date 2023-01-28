@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 
 class ADrequestHandledAdminScreenDart extends StatefulWidget {
   const ADrequestHandledAdminScreenDart({Key? key}) : super(key: key);
@@ -13,7 +12,6 @@ class _ADrequestHandledAdminScreenDartState
     extends State<ADrequestHandledAdminScreenDart> {
   @override
   Widget build(BuildContext context) {
-    var switchFlag = true;
 
     return Scaffold(
       appBar: AppBar(

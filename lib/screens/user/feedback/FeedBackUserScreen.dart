@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_selector/flutter_custom_selector.dart';
 
@@ -14,9 +16,6 @@ class FeedBackUserScreen extends StatefulWidget {
 
 class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
   // final _ColumnKey = GlobalKey<ColumnState>();
-
-  var _CKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     final _FormKey = GlobalKey<FormState>();

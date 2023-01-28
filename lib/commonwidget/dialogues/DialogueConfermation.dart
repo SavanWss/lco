@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
-import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class DialogueConfermation {
   static DialogueConfermation _instance = new DialogueConfermation.internal();
@@ -12,7 +10,6 @@ class DialogueConfermation {
 
   static Future<void> showCustomDialog(
     BuildContext context, {
-    @required String title = "",
     String acceptBtnText = "Accept",
     String rejectBtnText = "Reject",
     required Function unNamed

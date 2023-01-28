@@ -26,7 +26,6 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

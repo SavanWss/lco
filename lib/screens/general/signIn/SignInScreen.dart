@@ -145,7 +145,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       print("login === $login");
                       if (login["status"] == true) {
                         var userData = login["data"][0];
-                        print("user == ${userData}");
                         if (userData["profession"] == null || userData["married_status"] == null || userData["yearly_income"] == null) {
                         userData["profession"] = userData["married_status"] = "";
                         userData["yearly_income"] = 0;

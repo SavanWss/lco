@@ -10,6 +10,7 @@ class FbDonateFund {
       }) async {
     try {
 
+      // ignore: non_constant_identifier_names
       CollectionReference DonateFundData =
           FirebaseFirestore.instance.collection("fund_donations");
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/commonwidget/dialogues/DialogueRejectingReq.dart';
-import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
 import 'package:little_miracles_orphange/utils/requesteduserdetail/RequestedUserDetail.dart';
 import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
@@ -14,7 +12,6 @@ class DialogUtils {
 
   static void showCustomDialog(
     BuildContext context, {
-    @required String title = "",
     String acceptBtnText = "Accept",
     String rejectBtnText = "Reject",
   }) {
@@ -52,7 +49,7 @@ class DialogUtils {
                   ),
                   ElevatedButton(
                       child: Text(rejectBtnText),
-                      onPressed: () =>DialogueRejectingReq.showCustomDialog(context, title: title))
+                      onPressed: () =>DialogueRejectingReq.showCustomDialog(context))
 
             ],
           );

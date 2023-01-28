@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:little_miracles_orphange/utils/adoptionrequest/AdoptionRequest.dart';
-import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class DialogueApprovedDetails {
   static DialogueApprovedDetails _instance = new DialogueApprovedDetails.internal();
@@ -12,7 +10,6 @@ class DialogueApprovedDetails {
 
   static void showCustomDialog(
     BuildContext context, {
-    @required String title = "",
     String acceptBtnText = "Ok",
   }) {
     showDialog(
