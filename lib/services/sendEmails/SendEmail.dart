@@ -9,6 +9,7 @@ class SendEmail {
     var response = await http.post(url);
     print('Response status: ${response}');
     print("mail sended");
+  
     } catch (e) {
       print("mail not sended");
     }

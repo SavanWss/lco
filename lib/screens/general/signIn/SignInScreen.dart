@@ -165,7 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             profession: userData["profession"],
                             totaldonatedfund: userData["total_dnt_fund"],
                             adoptedchild: userData["adopted_child"],
-                            yearlyincome: userData["yearly_income"],
+                            yearlyincome: 0,
                             marriedstatus: userData["married_status"]);
 
                         if (LoggedInDetails.userRole == "user") {

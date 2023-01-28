@@ -137,8 +137,12 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                             print("in ui file response == ${response}");
 
                             print('SUCCESS!');
+                            setState(() {
+                              
+                            });
                           } catch (error) {
                             print(error.toString());
+                            Toast.toastView(msg: "feedback not sended");
                           }
                         }
                       },
