@@ -40,7 +40,10 @@ class _AdoptChildFormUserScreenState extends State<AdoptChildFormUserScreen> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
-                  //  adoption reason
+
+                 if(LoggedInDetails.userYearlyIncome != 0 
+                 && LoggedInDetails.userMarriedStatus != "") ...[
+                   //  adoption reason
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: TextFormField(
@@ -168,6 +171,8 @@ class _AdoptChildFormUserScreenState extends State<AdoptChildFormUserScreen> {
                         }
                       },
                       child: Text("SignIn")),
+                 ]
+    
                 ],
               ),
             )),

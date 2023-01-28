@@ -5,7 +5,10 @@ import 'package:flutter_custom_selector/flutter_custom_selector.dart';
 
 import 'package:emailjs/emailjs.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
+import 'package:little_miracles_orphange/services/sendEmails/SendEmail.dart';
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
+
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class FeedBackUserScreen extends StatefulWidget {
   const FeedBackUserScreen({super.key});
@@ -103,20 +106,36 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                           };
 
                           try {
-                            await EmailJS.send(
-                              'service_xv8jdhm',
-                              'template_tj8grod',
-                              templateParams,
-                              const Options(
-                                publicKey: 'HPzTaBZDBjd1DvCX2',
-                                privateKey: 'A3lGefnD4Xmi6K6LbhPJ1',
-                              ),
-                            );
-                            Toast.toastView(msg: "your feedback sended");
-                            setState(() {
-                              feedBackContoller.text = "";
-                            });
-                            Navigator.pop(context);
+                            // await EmailJS.send(
+                            //   'service_xv8jdhm',
+                            //   'template_tj8grod',
+                            //   templateParams,
+                            //   const Options(
+                            //     publicKey: 'HPzTaBZDBjd1DvCX2',
+                            //     privateKey: 'A3lGefnD4Xmi6K6LbhPJ1',
+                            //   ),
+                            // );
+                            // Toast.toastView(msg: "your feedback sended");
+                            // setState(() {
+                            //   feedBackContoller.text = "";
+                            // });
+                            // Navigator.pop(context);
+
+                            // final Email email = Email(
+                            //   body: 'Email body',
+                            //   subject: 'Email subject',
+                            //   recipients: ['savan.com'],
+                            //   cc: ['cc@example.com'],
+                            //   bcc: ['bcc@example.com'],
+                            //   attachmentPaths: ['/path/to/attachment.zip'],
+                            //   isHTML: false,
+                            // );
+
+                            // await FlutterEmailSender.send(email);
+
+                            var response = await SendEmail.sendEmail(sub: "FeedBack from User ${LoggedInDetails.userEmail}", body: "Your FeedBack content is ${feedBackContoller.text} With ${starRate} stars");
+                            print("in ui file response == ${response}");
+
                             print('SUCCESS!');
                           } catch (error) {
                             print(error.toString());
