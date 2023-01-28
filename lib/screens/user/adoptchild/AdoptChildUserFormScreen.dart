@@ -6,6 +6,7 @@ import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicato
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/firebase/FbAddAdRequests.dart';
+import 'package:little_miracles_orphange/services/sendEmails/SendEmail.dart';
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 
 class AdoptChildFormUserScreen extends StatefulWidget {
@@ -163,6 +164,9 @@ class _AdoptChildFormUserScreenState extends State<AdoptChildFormUserScreen> {
                             Toast.toastView(
                                 msg: "adoption request sended successfully");
                             Navigator.pop(context);
+
+                          var emailResponse = await SendEmail.sendEmail(sub: "Child Adoption Request From ${LoggedInDetails.userEmail}", body: "hi LCO my reason of Child Adoption is ${adDesController.text}");
+
                           } else {
                             CircularIndicator.stopCircularIndicator(context);
                             Toast.toastView(
