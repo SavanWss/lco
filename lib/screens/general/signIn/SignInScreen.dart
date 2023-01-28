@@ -97,6 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: TextFormField(
                   autofocus: false,
+                  obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                     labelText: "password",

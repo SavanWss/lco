@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:little_miracles_orphange/commonwidget/payment/PayMent.dart';
 import 'package:little_miracles_orphange/firebase_options.dart';
 import 'package:little_miracles_orphange/screens/SegMent.dart';
 import 'package:little_miracles_orphange/screens/admin/adoptionrequest/ADrequestHandledAdminScreen.dart.dart';
@@ -151,7 +150,6 @@ class _MyAppState extends State<MyApp> {
 
         // testiong screens
         "/sendnotification": (context) => SegMent(),
-        "/payment":(context) => PayMent(),
         // "/tableView":(context) => TableView1(title: "table view savan")
       },
     );
