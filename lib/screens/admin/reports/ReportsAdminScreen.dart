@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetReports.dart';
@@ -17,6 +18,8 @@ class _ReposrtAdminScreenState extends State<ReposrtAdminScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var times = Timestamp.fromMicrosecondsSinceEpoch(634827387926233);
+
     return Scaffold(
       appBar: AppBar(
         shadowColor: Color.fromARGB(48, 208, 46, 237),
@@ -39,50 +42,58 @@ class _ReposrtAdminScreenState extends State<ReposrtAdminScreen> {
               } else if (snapshot.hasData) {
                 final data = snapshot.data;
                 List a = data as List;
+                print(a);
 
-                return RefreshIndicator(child: Stack(children: [
-                  ListView(
-                    children: [
-                      DataTable(columns: [
-                                  DataColumn(
-                                    label: Text('Name'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Quantity'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Time'),
-                                  ),
-                                ], rows: [
-                                  for (var i = 0;
-                                      i < a.length;
-                                      i++) ...[
-                                    DataRow(
-                                      cells: [
-                                        DataCell(Text(
-                                          '${a[i]["name_of_things"]}',
-                                          softWrap: true,
-                                          style: TextStyle(fontSize: 10),
-                                        )),
-                                        DataCell(Text(
-                                            '${a[i]["quantity"]}')),
-                                        DataCell(Text(
-                                            '${(a[i]['date_and_time']) }'))
-                                      ],
-                                      onLongPress: () async{
-                               
-                                      },
-                                    )
-                                  ]
-                                ]),
-                    ],
-                  )
-                ]), onRefresh: () async {
+                a.sort((a, b) {
+                  return Comparable.compare(a["date_and_time"].toString(),
+                      b["date_and_time"].toString());
+                });
+
+                var reversedList = new List.from(a.reversed);
+                a = reversedList;
+
+                return RefreshIndicator(
+                    child: Stack(children: [
+                      ListView(
+                        children: [
+                          DataTable(columns: [
+                            DataColumn(
+                              label: Text('Name'),
+                            ),
+                            DataColumn(
+                              label: Text('Quantity'),
+                            ),
+                            DataColumn(
+                              label: Text('Time'),
+                            ),
+                          ], rows: [
+                            for (var i = 0; i < a.length; i++) ...[
+                              DataRow(
+                                cells: [
+                                  DataCell(Text(
+                                    '${a[i]["name_of_things"]}',
+                                    softWrap: true,
+                                    style: TextStyle(fontSize: 10),
+                                  )),
+                                  DataCell(Text('${a[i]["quantity"]}')),
+                                  DataCell(Text(
+                                      '${DateTime.fromMicrosecondsSinceEpoch(a[i]["date_and_time"].microsecondsSinceEpoch)}'))
+                                ],
+                                onLongPress: () async {},
+                              )
+                            ]
+                          ]),
+                        ],
+                      )
+                    ]),
+                    onRefresh: () async {
                       setState(() {});
                     });
               }
             }
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
           future: getData()),
     );
