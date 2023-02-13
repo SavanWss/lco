@@ -34,6 +34,7 @@ import 'package:little_miracles_orphange/screens/user/dashboard/DashUserScreen.d
 import 'package:little_miracles_orphange/screens/user/donation/DonationUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/feedback/FeedBackUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/notice/NoticeUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/payment/SettingPayMentUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/reports/ResportUserScreen.dart';
 import 'package:little_miracles_orphange/services/notification/local_notification_service.dart';
 
@@ -147,6 +148,7 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.userNoticeScreen: (context) => NoticeUserScreen(),
         ScreenRoutes.userReportScreen: (context) => ReportUserScreen(),
         ScreenRoutes.userDonationScren:(context) => DonatioonUserScreen(),
+        ScreenRoutes.userPayMentSettingScreen:(context) => SettingPayMentUserScreen(),
 
         // testiong screens
         "/sendnotification": (context) => SegMent(),

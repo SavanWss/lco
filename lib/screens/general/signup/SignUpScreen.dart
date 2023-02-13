@@ -8,6 +8,7 @@ import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicato
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/datastorerinutils/LogInDataSaver.dart';
+import 'package:little_miracles_orphange/services/firebase/FbPayMentAccount.dart';
 import 'package:little_miracles_orphange/services/firebase/FbSignIn.dart';
 
 import 'package:little_miracles_orphange/services/firebase/FbSignUp.dart';
@@ -373,6 +374,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       print("mainResponse");
                       print(mainResponse);
+
+                      var createPayAcc = await FbPayMentAccount.fbCreatePayMentAcc(user_email: emailController.text);
 
                       print("firedata clicked");
 

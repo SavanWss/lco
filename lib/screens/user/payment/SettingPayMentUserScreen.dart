@@ -1,36 +1,41 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_selector/flutter_custom_selector.dart';
-
-import 'package:emailjs/emailjs.dart';
+import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
-import 'package:little_miracles_orphange/services/sendEmails/SendEmail.dart';
+import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
+import 'package:little_miracles_orphange/services/firebase/FbPayMentAccount.dart';
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
 
-import 'package:flutter_email_sender/flutter_email_sender.dart';
-
-class FeedBackUserScreen extends StatefulWidget {
-  const FeedBackUserScreen({super.key});
+class SettingPayMentUserScreen extends StatefulWidget {
+  const SettingPayMentUserScreen({super.key});
 
   @override
-  State<FeedBackUserScreen> createState() => _FeedBackUserScreenState();
+  State<SettingPayMentUserScreen> createState() =>
+      _SettingPayMentUserScreenState();
 }
 
-class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
-  // final _ColumnKey = GlobalKey<ColumnState>();
+class _SettingPayMentUserScreenState extends State<SettingPayMentUserScreen> {
+  final _FormKey = GlobalKey<FormState>();
+  String starRate = "";
+  var fundContoller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final _FormKey = GlobalKey<FormState>();
-    String starRate = "";
-    var feedBackContoller = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         shadowColor: Color.fromARGB(48, 208, 46, 237),
         title: Text("FeedBack"),
         titleSpacing: 1,
         centerTitle: true,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        isExtended: true,
+        child: Center(
+          child: Icon(Icons.add),
+        ),
       ),
       body: SafeArea(
         child: Form(
@@ -44,7 +49,7 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                           EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                       child: CustomSingleSelectField(
                         decoration: InputDecoration(
-                          labelText: "Gives the star",
+                          labelText: "Funds To...",
                           suffixIcon: Icon(Icons.calendar_view_day_outlined),
                           labelStyle: TextStyle(fontSize: 15),
                           border: OutlineInputBorder(
@@ -53,10 +58,10 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                               color: Color.fromARGB(255, 255, 0, 0),
                               fontSize: 10),
                         ),
-                        items: ["5", "4", "3", "2", "1"],
+                        items: ["Donate To Lco", "Revoke Funds"],
                         validator: ((value) {
                           if (value!.isEmpty || value == null) {
-                            return "Enter the Age";
+                            return "Take Your Choice";
                           } else {
                             return null;
                           }
@@ -76,8 +81,8 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                       autofocus: false,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
-                        labelText: "Write Your FeedBack",
-                        suffixIcon: Icon(Icons.manage_accounts),
+                        labelText: "Enter Your Amount",
+                        suffixIcon: Icon(Icons.money),
                         labelStyle: TextStyle(fontSize: 15),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -85,10 +90,10 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                             color: Color.fromARGB(255, 255, 0, 0),
                             fontSize: 10),
                       ),
-                      controller: feedBackContoller,
+                      controller: fundContoller,
                       validator: ((value) {
                         if (value!.isEmpty || value == null) {
-                          return "Enter the FeedBack.";
+                          return "Enter the Amount.";
                         } else {
                           return null;
                         }
@@ -100,23 +105,20 @@ class _FeedBackUserScreenState extends State<FeedBackUserScreen> {
                   ElevatedButton(
                       onPressed: () async {
                         if (_FormKey.currentState!.validate()) {
-                          Map<String, dynamic> templateParams = {
-                            "user_name": LoggedInDetails.userName,
-                            "feedback_msg": feedBackContoller.text,
-                          };
+                          CircularIndicator.startCircularIndicator(context);
 
-                          try {
-                            var response = await SendEmail.sendEmail(sub: "FeedBack from User ${LoggedInDetails.userEmail}", body: "Your FeedBack content is ${feedBackContoller.text} With ${starRate} stars");
-                            print("in ui file response == ${response}");
+                          bool interNetConnectionFlag =
+                              await InterNetConnectivityChecker
+                                  .interNetConnectivityChecker();
 
-                            print('SUCCESS!');
-                            setState(() {
-                              
-                            });
-                          } catch (error) {
-                            print(error.toString());
-                            Toast.toastView(msg: "feedback not sended");
+                          if (interNetConnectionFlag == false) {
+                            Toast.toastView(msg: "connect to network!!!");
+                            Navigator.of(context).pop();
+                            return;
                           }
+                        
+                        var paymentStatus = FbPayMentAccount.fbDonateRevokeFunds(user_email: LoggedInDetails.userEmail, donate: true,funds: fundContoller);
+
                         }
                       },
                       child: Text("Send FeedBack")),

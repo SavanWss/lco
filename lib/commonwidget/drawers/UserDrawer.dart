@@ -112,6 +112,13 @@ class _UserDrawerState extends State<UserDrawer> {
                 title: Text('FeedBack'),
               ),
               ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.userPayMentSettingScreen);
+                },
+                leading: Icon(Icons.payment),
+                title: Text('Payments'),
+              ),
+              ListTile(
                 onTap: () async {
                   try {
                     await FbSignOut.fbSignOut();
