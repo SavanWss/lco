@@ -6,6 +6,7 @@ import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
 import 'package:little_miracles_orphange/services/firebase/FbPayMentAccount.dart';
 import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
+import 'package:little_miracles_orphange/utils/screens_routes/ScreenRoutes.dart';
 
 class SettingPayMentUserScreen extends StatefulWidget {
   const SettingPayMentUserScreen({super.key});
@@ -25,13 +26,15 @@ class _SettingPayMentUserScreenState extends State<SettingPayMentUserScreen> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Color.fromARGB(48, 208, 46, 237),
-        title: Text("FeedBack"),
+        title: Text("Funds"),
         titleSpacing: 1,
         centerTitle: true,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, ScreenRoutes.userPayMentAddFundScreen);
+        },
         isExtended: true,
         child: Center(
           child: Icon(Icons.add),
@@ -116,12 +119,39 @@ class _SettingPayMentUserScreenState extends State<SettingPayMentUserScreen> {
                             Navigator.of(context).pop();
                             return;
                           }
-                        
-                        var paymentStatus = FbPayMentAccount.fbDonateRevokeFunds(user_email: LoggedInDetails.userEmail, donate: true,funds: fundContoller);
+                          print("internet connectivity test passed!!!!");
+                          print("payment handler is called");
+                          if (starRate == "Donate To Lco") {
+                            var paymentStatus =
+                                FbPayMentAccount.fbDonateRevokeFunds(
+                                    user_email: LoggedInDetails.userEmail,
+                                    donate: true,
+                                    funds: fundContoller.text);
 
+                            if (paymentStatus["status"] == true) {
+                              Toast.toastView(msg: "Donated SuccessFuly");
+                              setState(() {});
+                            } else {
+                              Toast.toastView(msg: "Oops Error Occured...!");
+                            }
+                          } else {
+                            var paymentStatus =
+                                FbPayMentAccount.fbDonateRevokeFunds(
+                                    user_email: LoggedInDetails.userEmail,
+                                    donate: false,
+                                    funds: fundContoller.text);
+
+                            if (paymentStatus["status"] == true) {
+                              Toast.toastView(msg: "Donated SuccessFuly");
+                              setState(() {});
+                            } else {
+                              Toast.toastView(msg: "Oops Error Occured...!");
+                            }
+                          }
+                          Navigator.of(context).pop();
                         }
                       },
-                      child: Text("Send FeedBack")),
+                      child: Text("Perform")),
                 ],
               ),
             )),

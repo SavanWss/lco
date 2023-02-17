@@ -27,7 +27,7 @@ import 'package:little_miracles_orphange/screens/general/notice/DetailedNoticeSc
 import 'package:little_miracles_orphange/screens/general/signIn/SignInScreen.dart';
 import 'package:little_miracles_orphange/screens/general/signup/SignUpScreen.dart';
 
-import 'package:little_miracles_orphange/screens/user/addfund/AddFundUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/payment/AddFundUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/adoptchild/MngAdoptChildUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/adoptchild/adoptChildUserFormScreen.dart';
 import 'package:little_miracles_orphange/screens/user/dashboard/DashUserScreen.dart';
@@ -140,7 +140,7 @@ class _MyAppState extends State<MyApp> {
 
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),
-        ScreenRoutes.userAddFundScreen: (context) => AddFundUserScreen(),
+        ScreenRoutes.userPayMentAddFundScreen: (context) => AddFundUserScreen(),
         // ScreenRoutes.userManageAdoptChildScreen: (context) => userManageAdoptChildScreen()
         ScreenRoutes.userManageAdoptChildScreen:(context) => MngAdoptChildUserScreen(),
         ScreenRoutes.userAdoptChildFormScreen:(context) => AdoptChildFormUserScreen(),

@@ -22,7 +22,7 @@ class ScreenRoutes {
 
   // user Screens
   static String userDashboardScreen = "/userdashboard";
-  static String userAddFundScreen = "/useraddfund";
+  static String userPayMentAddFundScreen = "/useraddfund";
   static String userManageAdoptChildScreen = "/useradoptchildscreen";
   static String userAdoptChildFormScreen = "/useradoptchildformscreen";
   static String userFeedBackScreen = "/userfeedbackscreen";

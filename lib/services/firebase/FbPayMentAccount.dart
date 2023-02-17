@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FbPayMentAccount {
@@ -28,12 +26,14 @@ class FbPayMentAccount {
   static fbDonateRevokeFunds(
       {required user_email, required donate, required funds}) async {
     QuerySnapshot snapShot = await FirebaseFirestore.instance
-        .collection("notices")
+        .collection("payment_account")
         .where("user_email", isEqualTo: user_email)
         .get();
     List<Object?> data = snapShot.docs.map((e) {
       return e.data();
     }).toList();
+
+    print("list ==  ${data}");
 
     var ls = data as List;
 
@@ -41,12 +41,14 @@ class FbPayMentAccount {
 
     var balance = ls[0]["balance"].toString();
 
-    print(balance);
+    print(balance.runtimeType);
+    var number = int.parse(balance);
 
-    if (int.parse(balance as String) - funds <= 0) {
+    if (number - int.parse(funds) <= 0) {
+      print("aafter 1111");
       return {"status": false, "error": "insufficient funds"};
     }
-
+    print("aafter ");
     var collection2 = FirebaseFirestore.instance.collection('payment_account');
 
     CollectionReference collection =
@@ -54,12 +56,14 @@ class FbPayMentAccount {
 
     if (donate) {
       collection2.doc(user_email).set(
-          {"balance": int.parse(balance) - funds}, SetOptions(merge: true));
+          {"balance": int.parse(balance) - int.parse(funds)},
+          SetOptions(merge: true));
 
       collection2.doc("lco").set(
-          {"balance": int.parse(balance) + funds}, SetOptions(merge: true));
+          {"balance": int.parse(balance) + int.parse(funds)},
+          SetOptions(merge: true));
 
-      final firstResponse = collection.doc(user_email).set({
+      final firstResponse = collection.doc().set({
         "user_email": user_email,
         "payment_id_to": "${user_email.split("@")[0]}@lcoPay",
         "payment_id_from": "lco@lcoPay",
@@ -72,11 +76,10 @@ class FbPayMentAccount {
       return {"status": true, "msg": "funds donated successfully"};
     } else {
       collection2.doc(user_email).set(
-          {"balance": int.parse(balance) - funds}, SetOptions(merge: true));
+          {"balance": int.parse(balance) - int.parse(funds) }, SetOptions(merge: true));
 
-      final firstResponse = collection.doc(user_email).set({
+      final firstResponse = collection.doc().set({
         "user_email": user_email,
-             "payment_id_to": "${user_email.split("@")[0]}@lcoPay",
         "payment_id_from": "cash",
         "date_and_time": DateTime.now(),
         "status": "success",
