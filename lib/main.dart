@@ -19,6 +19,7 @@ import 'package:little_miracles_orphange/screens/admin/dashboard/DashAdminScreen
 import 'package:little_miracles_orphange/screens/admin/child/MngChildAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/AddNoticeAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/MngNoticeAdminScreen.dart';
+import 'package:little_miracles_orphange/screens/admin/reports/FundDonateReportsAdminScreen.dart';
 
 import 'package:little_miracles_orphange/screens/admin/reports/ReportsAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/users/userAdminScreen.dart';
@@ -137,6 +138,7 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.adminAdReqResponseScreen:(context) => ADrequestHandledAdminScreenDart(),
         ScreenRoutes.adminAdAceeptReqScreen:(context) => AdReqAceeptAdminScreen(),
         ScreenRoutes.adminAdRejectReqScreen:(context) => AdReqRejectAdminScreen(),
+        ScreenRoutes.adminDonationReports: (context) => FundDonateReportsAdminScreen(),
 
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),

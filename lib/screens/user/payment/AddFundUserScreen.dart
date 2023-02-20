@@ -28,6 +28,7 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
     final _FormKey = GlobalKey<FormState>();
 
     var fundContoller = TextEditingController();
+    var otpController = TextEditingController();
 
     return Scaffold(
         appBar: AppBar(
@@ -72,6 +73,12 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
                       ),
                     ),
 
+
+
+
+
+
+
                     // send the main
                     ElevatedButton(
                         onPressed: () async {
@@ -96,6 +103,8 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
                             setState(() {
                               Toast.toastView(msg: "FUnd Added Successfully...");
                             });
+
+
                           }
                         },
                         child: Text("Add Funds")),
