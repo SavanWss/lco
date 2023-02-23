@@ -1,20 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
-import 'package:little_miracles_orphange/services/firebase/FbGetReports.dart';
+import 'package:little_miracles_orphange/services/firebase/FbFundUsageByLCO.dart';
 
-class FundDonateReportsAdminScreen extends StatefulWidget {
-  const FundDonateReportsAdminScreen({super.key});
+class FundUsageReportAdminScreen extends StatefulWidget {
+  const FundUsageReportAdminScreen({super.key});
 
   @override
-  State<FundDonateReportsAdminScreen> createState() =>
-      _FundDonateReportsAdminScreenState();
+  State<FundUsageReportAdminScreen> createState() => _FundUsageReportAdminScreenState();
 }
 
-class _FundDonateReportsAdminScreenState
-    extends State<FundDonateReportsAdminScreen> {
-  getData() async {
-    var data = await FbGetReports.fbGetFundsReport();
+class _FundUsageReportAdminScreenState extends State<FundUsageReportAdminScreen> {
+ getData() async {
+    var data = await FbFundUsageByLCO.fbGetFundUsageDetailsByLCO();
     return data;
   }
 
@@ -51,13 +48,6 @@ class _FundDonateReportsAdminScreenState
                 var reversedList = new List.from(a.reversed);
                 a = reversedList;
 
-                var allDonationElement = [];
-
-                for (var element in a) {
-                  if ("donation" == element["where"]) {
-                    allDonationElement.add(element);
-                  }
-                }
 
                 print("a == ${a}");
 
@@ -67,29 +57,29 @@ class _FundDonateReportsAdminScreenState
                         children: [
                           DataTable(columns: [
                             DataColumn(
-                              label: Text('user'),
+                              label: Text('funds'),
                             ),
                             DataColumn(
-                              label: Text('fund'),
+                              label: Text('description'),
                             ),
                             DataColumn(
                               label: Text('date_and_time'),
                             ),
                           ], rows: [
                             for (var i = 0;
-                                i < allDonationElement.length;
+                                i < a.length;
                                 i++) ...[
                               DataRow(
                                 cells: [
                                   DataCell(Text(
-                                    '${allDonationElement[i]["user_email"]}',
+                                    '${a[i]["funds"]}',
                                     softWrap: true,
                                     style: TextStyle(fontSize: 10),
                                   )),
                                   DataCell(Text(
-                                      '${allDonationElement[i]["funds"]}')),
+                                      '${a[i]["description"]}')),
                                   DataCell(Text(
-                                      '${DateTime.fromMicrosecondsSinceEpoch(allDonationElement[i]["date_and_time"].microsecondsSinceEpoch)}'))
+                                      '${DateTime.fromMicrosecondsSinceEpoch(a[i]["date_and_time"].microsecondsSinceEpoch)}'))
                                 ],
                                 onLongPress: () async {},
                               )

@@ -75,6 +75,15 @@ class _AdminDrawerState extends State<AdminDrawer> {
 
               ListTile(
                 onTap: () {
+                  Navigator.pushNamed(
+                      context, ScreenRoutes.adminManageFundsScreen);
+                },
+                leading: Icon(Icons.manage_accounts),
+                title: Text('ManageFunds'),
+              ),
+
+              ListTile(
+                onTap: () {
                   Navigator.pushNamed(context, ScreenRoutes.adminManageAdoptionRequestScreen);
                 },
                 leading: Icon(Icons.settings),
@@ -93,8 +102,25 @@ class _AdminDrawerState extends State<AdminDrawer> {
                   Navigator.pushNamed(context, ScreenRoutes.adminReportscreen);
                 },
                 leading: Icon(Icons.settings),
-                title: Text('Reports'),
+                title: Text('Things Reports'),
               ),
+
+              ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.adminDonationReports);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('Fund Donate Reports'),
+              ),
+
+              ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.adminDonatedFundUsageReportScreen);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('Fund Usage Reports'),
+              ),
+
               ListTile(
                 onTap: () {
                   Navigator.pushNamed(

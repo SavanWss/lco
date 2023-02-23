@@ -25,7 +25,7 @@ class _DonationReportsUserScreenState extends State<DonationReportsUserScreen> {
   }
 
   getData() async {
-    var data = await FbGetReports.fbGetThingsReport();
+    var data = await FbGetReports.fbGetFundsReport();
     return data;
   }
 
@@ -48,8 +48,7 @@ class _DonationReportsUserScreenState extends State<DonationReportsUserScreen> {
               } else if (snapshot.hasData) {
                 final data = snapshot.data;
                 List a = data as List;
-                print("i am user ksbd789912394891498938648934981239849823489392864982345238748923745239867458923892398479");
-
+              
                 a.sort((a, b) {
                   return Comparable.compare(a["date_and_time"].toString(),
                       b["date_and_time"].toString());
@@ -61,11 +60,21 @@ class _DonationReportsUserScreenState extends State<DonationReportsUserScreen> {
                 var segmentFlag = 0;
 
                 var userSpecificDon = [];
+                var allDonationElement = [];
+
                 for (var element in a) {
                   if (LoggedInDetails.userEmail == element["user_email"]) {
                     userSpecificDon.add(element);
                   }
                 }
+
+                  for (var element in a) {
+                  if ("donation" == element["where"]) {
+                    allDonationElement.add(element);
+                  }
+                }
+
+                print("a == ${a}");
 
                 return RefreshIndicator(
                     child: Stack(children: [
@@ -139,17 +148,17 @@ class _DonationReportsUserScreenState extends State<DonationReportsUserScreen> {
                               label: Text('date_and_time'),
                             ),
                           ], rows: [
-                            for (var i = 0; i < a.length; i++) ...[
+                            for (var i = 0; i < allDonationElement.length; i++) ...[
                               DataRow(
                                 cells: [
                                   DataCell(Text(
-                                    '${a[i]["user_email"]}',
+                                    '${allDonationElement[i]["user_email"]}',
                                     softWrap: true,
                                     style: TextStyle(fontSize: 10),
                                   )),
-                                  DataCell(Text('${a[i]["funds"]}')),
+                                  DataCell(Text('${allDonationElement[i]["funds"]}')),
                                   DataCell(Text(
-                                      '${DateTime.fromMicrosecondsSinceEpoch(a[i]["date_and_time"].microsecondsSinceEpoch)}'))
+                                      '${DateTime.fromMicrosecondsSinceEpoch(allDonationElement[i]["date_and_time"].microsecondsSinceEpoch)}'))
                                 ],
                                 onLongPress: () async {},
                               )

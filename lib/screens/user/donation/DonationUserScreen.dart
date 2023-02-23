@@ -16,15 +16,6 @@ class DonatioonUserScreen extends StatefulWidget {
 }
 
 class _DonatioonUserScreenState extends State<DonatioonUserScreen> {
-  Widget buildSegment(String text) {
-    return Container(
-      child: Text(
-        text,
-        style:
-            TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255)),
-      ),
-    );
-  }
 
   final _FormKeyThings = GlobalKey<FormState>();
 
@@ -46,7 +37,7 @@ class _DonatioonUserScreenState extends State<DonatioonUserScreen> {
     super.didUpdateWidget(oldWidget);
   }
 
-  var segmentFlag = 0;
+  var segmentFlag = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -62,32 +53,7 @@ class _DonatioonUserScreenState extends State<DonatioonUserScreen> {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: CupertinoSlidingSegmentedControl(
-                    backgroundColor: Color.fromRGBO(82, 21, 72, 1),
-                    thumbColor: Color.fromARGB(224, 175, 146, 175),
-                    padding: EdgeInsets.all(8),
-                    groupValue: segmentFlag,
-                    children: {
-                      0: buildSegment("Add Fund"),
-                      1: buildSegment("Add Things")
-                    },
-                    onValueChanged: (value) {
-                      setState(() {
-                        segmentFlag = value!;
-                        print("segment flag == $value");
-                      });
-                    }),
-              ),
-            ),
-
-            if (segmentFlag == 0) ...[
-              // this is fund section
-              
-            ],
-            
+         
             if (segmentFlag == 1) ...[
               Padding(
                 padding: EdgeInsets.only(top: 70),

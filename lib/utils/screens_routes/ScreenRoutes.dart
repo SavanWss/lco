@@ -16,9 +16,11 @@ class ScreenRoutes {
   static String adminAddChildScreen = "/adminaddchild";
   static String adminUpdateChildScreen = "/adminupdatechild";
   static String adminManageAdoptionRequestScreen = "/adminmanageadoptrequest";
-  static String adminAdReqResponseScreen = "adminadoptrequestresponse";
-  static String adminAdAceeptReqScreen = "adminadoptrequestaccept";
-  static String adminAdRejectReqScreen = "adminadoptrequestreject";
+  static String adminAdReqResponseScreen = "/adminadoptrequestresponse";
+  static String adminAdAceeptReqScreen = "/adminadoptrequestaccept";
+  static String adminAdRejectReqScreen = "/adminadoptrequestreject";
+  static String adminManageFundsScreen = "/adminmanagefundsscreen";
+  static String adminDonatedFundUsageReportScreen = "/admindonatedfundreportscreen";
   
 
   // user Screens
@@ -31,5 +33,7 @@ class ScreenRoutes {
   static String userReportScreen = "/userreportscreen";
   static String userDonationScren = "/userdonationscreen";
   static String userPayMentSettingScreen = "/userpaymentsettingscreen";
+  static String userPayMentReportsScreen = "/userpaymentreportsscreen";
+  static String userMyChildScreen = "/usermychildPage";
 
 }

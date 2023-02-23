@@ -81,6 +81,23 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
                 uiData.sort((a,b) {
                   return Comparable.compare(a['child_number'], b['child_number']);
                 });
+
+                var adoptedChildsList = [];
+                var notAddoptedChildsList = [];
+
+                for (var element in uiData) {
+                  if (element["adopted_status"] == "Yes") {
+                    adoptedChildsList.add(element);
+                  } else {
+                    notAddoptedChildsList.add(element);
+                  }
+                }
+
+
+            print("adopted ==== ${adoptedChildsList}");
+
+  print("not adopted ==== ${adoptedChildsList}");
+
                 return RefreshIndicator(
                     onRefresh: () async {
                       setState(() {});
@@ -116,7 +133,72 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
                                 ),
                               )
                             ],
-                            for (int i = 0; i < uiData.length; i++) ...[
+
+
+
+//                             for (int i = 0; i < uiData.length; i++) ...[
+//                               GestureDetector(
+//                                 child: Card(
+//                                   margin: EdgeInsets.all(10),
+//                                   color: Colors.white,
+//                                   shadowColor:
+//                                       Color.fromARGB(255, 255, 255, 255),
+//                                   elevation: 20,
+//                                   child: Column(
+//                                     mainAxisSize: MainAxisSize.min,
+//                                     children: <Widget>[
+//                                       ListTile(
+//                                         leading: genderIconSelector(
+//                                             uiData[i]["gender"]),
+//                                         title: Text(
+//                                           '''
+// name :  ${uiData[i]["name"]}
+// id :         ${uiData[i]["child_number"]}
+// ''',
+//                                           style: TextStyle(fontSize: 20),
+//                                         ),
+//                                         subtitle: Text(
+//                                           '''
+// gender :      ${uiData[i]["gender"]}
+// adopted :    ${uiData[i]["adopted_status"]}
+// ''',
+//                                           style: TextStyle(fontSize: 20),
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                                 onTap: () {
+//                                   print(uiData[i]["child_number"]);
+//                                   ManageChildData.selectedChildData = uiData[i]["child_number"];
+//                                   print("managedChilddata === ${ManageChildData.selectedChildData}");
+//                                   Navigator.restorablePushNamed(context, ScreenRoutes.adminUpdateChildScreen);
+//                                 },
+//                               )
+//                             ]
+
+
+
+
+SizedBox(height: 15,),
+
+Center(
+  child: 
+Text(" adopted",style: TextStyle(
+  backgroundColor: Colors.white70,
+  fontSize: 20
+)),
+),
+
+SizedBox(height: 15,),
+// adopted
+
+
+
+
+
+
+                     for (int i = 0; i < adoptedChildsList.length; i++) ...[
                               GestureDetector(
                                 child: Card(
                                   margin: EdgeInsets.all(10),
@@ -132,15 +214,75 @@ class _MngChildAdminScreenState extends State<MngChildAdminScreen> {
                                             uiData[i]["gender"]),
                                         title: Text(
                                           '''
-name :  ${uiData[i]["name"]}
-id :         ${uiData[i]["child_number"]}
+name :  ${adoptedChildsList[i]["name"]}
+id :         ${adoptedChildsList[i]["child_number"]}
 ''',
                                           style: TextStyle(fontSize: 20),
                                         ),
                                         subtitle: Text(
                                           '''
-gender :      ${uiData[i]["gender"]}
-adopted :    ${uiData[i]["adopted_status"]}
+gender :      ${adoptedChildsList[i]["gender"]}
+adopted :    ${adoptedChildsList[i]["adopted_status"]}
+''',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onLongPress: () {
+                                  print("object");
+                                  print(adoptedChildsList[i]["child_number"]);
+                                  ManageChildData.selectedChildData = adoptedChildsList[i]["child_number"];
+                                  print("managedChilddata === ${ManageChildData.selectedChildData}");
+                                  Navigator.restorablePushNamed(context, ScreenRoutes.adminUpdateChildScreen);
+                                },
+                              )
+                            ],
+
+
+
+SizedBox(height: 15,),
+
+Center(
+  child: 
+Text("not adopted",style: TextStyle(
+  backgroundColor: Colors.white70,
+  fontSize: 20
+)),
+),
+
+SizedBox(height: 15,),
+// not adopted
+
+
+
+
+                     for (int i = 0; i < notAddoptedChildsList.length; i++) ...[
+                              GestureDetector(
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.white,
+                                  shadowColor:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  elevation: 20,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      ListTile(
+                                        leading: genderIconSelector(
+                                            uiData[i]["gender"]),
+                                        title: Text(
+                                          '''
+name :  ${notAddoptedChildsList[i]["name"]}
+id :         ${notAddoptedChildsList[i]["child_number"]}
+''',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        subtitle: Text(
+                                          '''
+gender :      ${notAddoptedChildsList[i]["gender"]}
+adopted :    ${notAddoptedChildsList[i]["adopted_status"]}
 ''',
                                           style: TextStyle(fontSize: 20),
                                         ),
@@ -149,13 +291,33 @@ adopted :    ${uiData[i]["adopted_status"]}
                                   ),
                                 ),
                                 onTap: () {
-                                  print(uiData[i]["child_number"]);
-                                  ManageChildData.selectedChildData = uiData[i]["child_number"];
+                                  print(notAddoptedChildsList[i]["child_number"]);
+                                  ManageChildData.selectedChildData = notAddoptedChildsList[i]["child_number"];
                                   print("managedChilddata === ${ManageChildData.selectedChildData}");
                                   Navigator.restorablePushNamed(context, ScreenRoutes.adminUpdateChildScreen);
                                 },
                               )
                             ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                           ],
                         )
                       ],

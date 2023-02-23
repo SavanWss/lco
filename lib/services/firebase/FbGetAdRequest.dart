@@ -32,6 +32,8 @@ class FbGetAdRequests {
       return e.data();
     }).toList();
 
+  print("data ============ ${data}");
+
     return data;
   }
 

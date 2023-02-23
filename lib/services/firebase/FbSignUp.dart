@@ -50,7 +50,7 @@ class FbSignUp {
           "profession": profession,
           "role": "user",
           "total_dnt_fund": 0,
-          "yearly_income": 0,
+          "yearly_income": int.parse(yearllyIncome),
           'token': notificstionToekn
         });
 

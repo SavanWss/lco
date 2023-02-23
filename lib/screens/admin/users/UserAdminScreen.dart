@@ -101,7 +101,8 @@ class _UserAdminScreenState extends State<UserAdminScreen> {
                               )
                             ],
                             for (int i = 0; i < uiData.length; i++) ...[
-                              GestureDetector(
+                      if(uiData[i]["role"] != "admin") ...[
+                                GestureDetector(
                                 child: Card(
                                   margin: EdgeInsets.all(10),
                                   color: Colors.white,
@@ -141,6 +142,7 @@ adopted_child :    ${uiData[i]["adopted_child"]}
                                   // Navigator.restorablePushNamed(context, ScreenRoutes.adminUpdateChildScreen);
                                 },
                               )
+                      ]
                             ]
                           ],
                         )

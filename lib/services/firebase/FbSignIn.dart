@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:little_miracles_orphange/services/firebase/FbAuth.dart';
 import 'package:little_miracles_orphange/services/firebase/FbGetDeviceToken.dart';
+import 'package:little_miracles_orphange/utils/admindashboard/admindashboard.dart';
 
 class FbSignIn {
   static fbSignIn({required email, required password}) async {
@@ -43,6 +44,21 @@ class FbSignIn {
     List<Object?> data = snapshot.docs.map((e) {
       return e.data();
     }).toList();
+
+
+    QuerySnapshot snapshot2 = await FirebaseFirestore.instance
+        .collection("users")
+        .get();
+
+    var data2 = snapshot.docs;
+
+    List<Object?> data4 = snapshot.docs.map((e) {
+      return e.data();
+    }).toList();
+
+
+    AdminDashBoard.TotalUser = data4.length;
+
     print("new userData 1111 $data");
     print("before obj");
 
@@ -50,15 +66,15 @@ class FbSignIn {
 
 // set push notification token
 
-    var pushNotificationToken = await FbGetDeviceToken.fbGetDeviceToken();
+    // var pushNotificationToken = await FbGetDeviceToken.fbGetDeviceToken();
 
-    try {
-      CollectionReference collection =
-          FirebaseFirestore.instance.collection('push_tokens');
-      var ad1 = await collection
-          .doc(email)
-          .set({"email": email, "token": pushNotificationToken});
-    } catch (e) {}
+    // try {
+    //   CollectionReference collection =
+    //       FirebaseFirestore.instance.collection('push_tokens');
+    //   var ad1 = await collection
+    //       .doc(email)
+    //       .set({"email": email, "token": pushNotificationToken});
+    // } catch (e) {}
 
     print("print data is settled");
     return {"status": true, "data": data};

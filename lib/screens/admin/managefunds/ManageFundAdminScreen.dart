@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_selector/widget/flutter_single_select.dart';
-import 'package:little_miracles_orphange/commonwidget/drawers/UserDrawer.dart';
+import 'package:little_miracles_orphange/commonwidget/drawers/AdminDrawer.dart';
 import 'package:little_miracles_orphange/commonwidget/indicator/CircularIndicator.dart';
 import 'package:little_miracles_orphange/commonwidget/toast/Toast.dart';
 import 'package:little_miracles_orphange/services/connectivitychecker/InterNetConnectionChecker.dart';
-import 'package:little_miracles_orphange/services/firebase/FbAddPayMent.dart';
-import 'package:little_miracles_orphange/services/firebase/FbPayMentAccount.dart';
-import 'package:little_miracles_orphange/utils/loggedInDetails/LoggedInDetails.dart';
+import 'package:little_miracles_orphange/services/firebase/FbFundUsageByLCO.dart';
 
-class AddFundUserScreen extends StatefulWidget {
-  const AddFundUserScreen({super.key});
+class ManageFundAdminScreen extends StatefulWidget {
+  const ManageFundAdminScreen({super.key});
 
   @override
-  State<AddFundUserScreen> createState() => _AddFundUserScreenState();
+  State<ManageFundAdminScreen> createState() => _ManageFundAdminScreenState();
 }
 
-class _AddFundUserScreenState extends State<AddFundUserScreen> {
-
+class _ManageFundAdminScreenState extends State<ManageFundAdminScreen> {
   @override
   Widget build(BuildContext context) {
     final _FormKey = GlobalKey<FormState>();
 
     var fundContoller = TextEditingController();
-    var otpController = TextEditingController();
+    var descController = TextEditingController();
 
     return Scaffold(
         appBar: AppBar(
-        shadowColor: Color.fromARGB(48, 208, 46, 237),
-        title: Text("Funds"),
-        titleSpacing: 1,
-        centerTitle: true,
-      ),
-        drawer: UserDrawer(),
+          shadowColor: Color.fromARGB(48, 208, 46, 237),
+          title: Text("Funds"),
+          titleSpacing: 1,
+          centerTitle: true,
+        ),
+        drawer: AdminDrawer(),
         body: SafeArea(
           child: Form(
               key: _FormKey,
@@ -45,7 +41,7 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
                           EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                       child: TextFormField(
                         autofocus: false,
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: "Enter Your Amount",
                           suffixIcon: Icon(Icons.money),
@@ -67,11 +63,32 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
                       ),
                     ),
 
-
-
-
-
-
+                    Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      child: TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelText: "Describe the use Fund",
+                          suffixIcon: Icon(Icons.money),
+                          labelStyle: TextStyle(fontSize: 15),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          errorStyle: TextStyle(
+                              color: Color.fromARGB(255, 255, 0, 0),
+                              fontSize: 10),
+                        ),
+                        controller: descController,
+                        validator: ((value) {
+                          if (value!.isEmpty || value == null) {
+                            return "Enter the Description.";
+                          } else {
+                            return null;
+                          }
+                        }),
+                      ),
+                    ),
 
                     // send the main
                     ElevatedButton(
@@ -88,15 +105,26 @@ class _AddFundUserScreenState extends State<AddFundUserScreen> {
                               Navigator.of(context).pop();
                               return;
                             }
+
                             print("internet connectivity test passed!!!!");
                             print("payment handler is called");
-                            var paymentStatus = FbAddPayMent.fbAddPayMent(
-                                user_email: LoggedInDetails.userEmail,
-                                funds: fundContoller.text);
-                            Navigator.of(context).pop();
-                            setState(() {
-                              Toast.toastView(msg: "Fund Added Successfully...");
-                            });
+
+                            var fireBaseResult =
+                                await FbFundUsageByLCO.fbFundUsageByLCO(
+                                    description: descController.text,
+                                    funds: fundContoller.text);
+
+                            if (fireBaseResult["status"] == true) {
+                              CircularIndicator.stopCircularIndicator(context);
+                              Toast.toastView(msg: "fund Revoked SuccessFully");
+                              setState(() {
+                                fundContoller.text = "";
+                                descController.text = "";
+                              });
+                            } else {
+                              CircularIndicator.stopCircularIndicator(context);
+                              Toast.toastView(msg: "${fireBaseResult["error"]}");
+                            }
 
 
                           }

@@ -17,9 +17,11 @@ import 'package:little_miracles_orphange/screens/admin/child/AddChildAdmin.dart'
 import 'package:little_miracles_orphange/screens/admin/child/UpdateChildAdmin.dart';
 import 'package:little_miracles_orphange/screens/admin/dashboard/DashAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/child/MngChildAdminScreen.dart';
+import 'package:little_miracles_orphange/screens/admin/managefunds/ManageFundAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/AddNoticeAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/notice/MngNoticeAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/reports/FundDonateReportsAdminScreen.dart';
+import 'package:little_miracles_orphange/screens/admin/reports/FundUsageReportAdminScreen.dart';
 
 import 'package:little_miracles_orphange/screens/admin/reports/ReportsAdminScreen.dart';
 import 'package:little_miracles_orphange/screens/admin/users/userAdminScreen.dart';
@@ -27,6 +29,8 @@ import 'package:little_miracles_orphange/screens/general/notice/DetailedNoticeSc
 
 import 'package:little_miracles_orphange/screens/general/signIn/SignInScreen.dart';
 import 'package:little_miracles_orphange/screens/general/signup/SignUpScreen.dart';
+import 'package:little_miracles_orphange/screens/user/donationReports/DonationReportsUserScreen.dart';
+import 'package:little_miracles_orphange/screens/user/mychilds/MyChildUserScreen.dart';
 
 import 'package:little_miracles_orphange/screens/user/payment/AddFundUserScreen.dart';
 import 'package:little_miracles_orphange/screens/user/adoptchild/MngAdoptChildUserScreen.dart';
@@ -139,7 +143,8 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.adminAdAceeptReqScreen:(context) => AdReqAceeptAdminScreen(),
         ScreenRoutes.adminAdRejectReqScreen:(context) => AdReqRejectAdminScreen(),
         ScreenRoutes.adminDonationReports: (context) => FundDonateReportsAdminScreen(),
-
+        ScreenRoutes.adminManageFundsScreen:(context) => ManageFundAdminScreen(),
+        ScreenRoutes.adminDonatedFundUsageReportScreen:(context) => FundUsageReportAdminScreen(),
         // user Screen
         ScreenRoutes.userDashboardScreen: (context) => DashUserScreen(),
         ScreenRoutes.userPayMentAddFundScreen: (context) => AddFundUserScreen(),
@@ -151,6 +156,8 @@ class _MyAppState extends State<MyApp> {
         ScreenRoutes.userReportScreen: (context) => ReportUserScreen(),
         ScreenRoutes.userDonationScren:(context) => DonatioonUserScreen(),
         ScreenRoutes.userPayMentSettingScreen:(context) => SettingPayMentUserScreen(),
+        ScreenRoutes.userPayMentReportsScreen:(context) => DonationReportsUserScreen(),
+        ScreenRoutes.userMyChildScreen:(context) => MyCHildUserScreen(),
 
         // testiong screens
         "/sendnotification": (context) => SegMent(),

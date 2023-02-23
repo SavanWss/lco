@@ -75,7 +75,7 @@ class _UserDrawerState extends State<UserDrawer> {
             if(LoggedInDetails.userAdoptedChild > 0) ...[
                         ListTile(
                 onTap: () {
-                  // Navigator.pushNamed(context, ScreenRoutes.userManageAdoptChildScreen);
+                  Navigator.pushNamed(context, ScreenRoutes.userMyChildScreen);
                 },
                 leading: Icon(Icons.manage_accounts),
                 title: Text('my child'),
@@ -96,6 +96,13 @@ class _UserDrawerState extends State<UserDrawer> {
                 },
                 leading: Icon(Icons.settings),
                 title: Text('Reports'),
+              ),
+                        ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, ScreenRoutes.userPayMentReportsScreen);
+                },
+                leading: Icon(Icons.settings),
+                title: Text('Donation Report'),
               ),
               ListTile(
                 onTap: () {

@@ -35,7 +35,13 @@ class DialogueRejectingReq {
                         key: _FormKey,
                         child: TextFormField(
                           controller: rejectionRejectController,
-                          
+                          validator: ((value) {
+                            if (value!.isEmpty || value == null) {
+                              return "Enter the Reason";
+                            } else {
+                              return null;
+                            }
+                          }),
                           decoration: InputDecoration(
                             hintText: "rejection reason",
                             border: OutlineInputBorder(
@@ -52,7 +58,8 @@ class DialogueRejectingReq {
                 child: Text(acceptBtnText),
                 onPressed: () async {
                   if (_FormKey.currentState!.validate()) {
-                    print("in the dilogue form reject reason ${rejectionRejectController.text}");
+                    print(
+                        "in the dilogue form reject reason ${rejectionRejectController.text}");
                     CircularIndicator.startCircularIndicator(context);
                     var rejectionFireBaseResponse =
                         await FbReqHandler.fbRejectRequest(

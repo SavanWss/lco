@@ -65,8 +65,8 @@ class FbPayMentAccount {
 
       final firstResponse = collection.doc().set({
         "user_email": user_email,
-        "payment_id_to": "${user_email.split("@")[0]}@lcoPay",
-        "payment_id_from": "lco@lcoPay",
+        "payment_id_to": "lco@lcoPay",
+        "payment_id_from": "${user_email.split("@")[0]}@lcoPay",
         "date_and_time": DateTime.now(),
         "status": "success",
         "funds": funds,

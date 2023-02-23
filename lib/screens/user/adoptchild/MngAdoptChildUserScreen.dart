@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:little_miracles_orphange/commonwidget/drawers/UserDrawer.dart';
@@ -71,15 +71,14 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
 
                 for (var i = 0; i < data.length; i++) {
                   if (data[i]["request_status"] == "Accepted") {
-                    rejectedRequestList.add(data[i]);
+                    approvedRequestList.add(data[i]);
                   }
                 }
 
-
-    if( approvedRequestList.length != 0) {
-      Navigator.of(context).pop();
-      Toast.toastView(msg: "you have already adopt the child");
-    }
+                if (approvedRequestList.length != 0) {
+                  Navigator.of(context).pop();
+                  Toast.toastView(msg: "you have already adopt the child");
+                }
 
                 return RefreshIndicator(
                     child: SingleChildScrollView(
@@ -99,9 +98,8 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                               ),
                               Padding(padding: EdgeInsets.all(15)),
 
-                          
 
-                              if (pendingRequestList.length == 0 && approvedRequestList.length != 0) ...[
+                              if (pendingRequestList.length == 0 ) ...[
                                 GestureDetector(
                                   child: Card(
                                     child: new Container(
@@ -131,6 +129,7 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                       ),
                                     ),
                                   ),
+
                                   onTap: () async {
                                     print("button is tapped");
                                     CircularIndicator.startCircularIndicator(
@@ -210,6 +209,7 @@ class _MngAdoptChildUserScreenState extends State<MngAdoptChildUserScreen> {
                                 ),
                               ),
                               Padding(padding: EdgeInsets.all(10)),
+
                               if (rejectedRequestList.length != 0) ...[
                                 SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
