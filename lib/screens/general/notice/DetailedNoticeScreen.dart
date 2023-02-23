@@ -67,6 +67,7 @@ class _DetailedNoticeScreenState extends State<DetailedNoticeScreen> {
                                 fontFamily: "Oswald",
                                 color: Color.fromRGBO(82, 21, 71, 1)),
                           ),
+                          
                           Padding(
                             padding: EdgeInsets.all(20),
                             child: Text(
