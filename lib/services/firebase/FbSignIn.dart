@@ -52,7 +52,7 @@ class FbSignIn {
 
     var data2 = snapshot.docs;
 
-    List<Object?> data4 = snapshot.docs.map((e) {
+    List<Object?> data4 = snapshot2.docs.map((e) {
       return e.data();
     }).toList();
 
