@@ -22,6 +22,7 @@ class _AddNoticeAdminScreenState extends State<AddNoticeAdminScreen> {
   final eventTitleController = TextEditingController();
   final eventTopicController = TextEditingController();
   final eventOrganizeController = TextEditingController();
+  final eventLinkController = TextEditingController();
 
   @override
   void dispose() {
@@ -184,6 +185,31 @@ class _AddNoticeAdminScreenState extends State<AddNoticeAdminScreen> {
                     ),
                   ),
 
+
+
+             // entrance Link
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    child: TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: "Event Mode",
+                        suffixIcon: Icon(Icons.calendar_view_day_outlined),
+                        labelStyle: TextStyle(fontSize: 15),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        errorStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 0, 0),
+                            fontSize: 10),
+                      ),
+                      controller: eventLinkController,
+                  
+                    ),
+                  ),
+
+
+
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: TextFormField(
@@ -232,7 +258,7 @@ class _AddNoticeAdminScreenState extends State<AddNoticeAdminScreen> {
                               description: descriptionController.text,
                               event_date_time: eventDataTimeController.text,
                               event_mode: eventModeController.text,
-                              event_organize: eventOrganizeController.text);
+                              event_organize: eventOrganizeController.text, event_link: eventLinkController.text);
                           // ignore: unnecessary_brace_in_string_interps
 
                           if (response["status"] == true) {

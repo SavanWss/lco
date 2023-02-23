@@ -17,6 +17,7 @@ class _DetailedNoticeScreenState extends State<DetailedNoticeScreen> {
       "Event Title",
       "Event_Topic",
       "Event Mode",
+      "Event_Link",
       "Event Timing",
       "Event Description",
       "Organizer"
@@ -28,6 +29,7 @@ class _DetailedNoticeScreenState extends State<DetailedNoticeScreen> {
       NoticeDetails.noticeEventTitle,
       NoticeDetails.noticeEventTopic,
       NoticeDetails.noticeEventMode,
+      NoticeDetails.noticeLink,
       NoticeDetails.noticeEventDateTime,
       NoticeDetails.noticeDescription,
       NoticeDetails.noticeOrganisedBy

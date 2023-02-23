@@ -9,6 +9,7 @@ class FbAddNotice {
       required description,
       required event_date_time,
       required event_mode,
+      required event_link,
       required event_organize}) async {
     try {
       
@@ -27,6 +28,7 @@ class FbAddNotice {
           "decsription":description,
           "event_date_and_time":event_date_time,
           "event_mode":event_mode,
+          "event_link": event_link,
           "event_title":event_title,
           "event_topic":event_topic,
           "organised_by":event_organize,

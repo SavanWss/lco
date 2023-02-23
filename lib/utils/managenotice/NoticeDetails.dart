@@ -6,5 +6,6 @@ class NoticeDetails {
   static String noticeEventTitle = "";
   static String noticeEventTopic = "";
   static String noticeOrganisedBy = "";
+  static String noticeLink = "";
   static num noticeId = -1;
 }
