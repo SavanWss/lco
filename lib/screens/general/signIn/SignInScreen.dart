@@ -130,8 +130,8 @@ print("email ===== ${emailController.text}");
 print("password ===== ${passwordController.text}");
                           // signin method is called
                           var login = await FbSignIn.fbSignIn(
-                              email: emailController.text,
-                              password: passwordController.text);
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
 
                           //  login validation
                           print("login === $login");
